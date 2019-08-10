@@ -1,0 +1,17 @@
+<%= form_with(model: quartel, local: true) do |form| %>
+  <% if quartel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(quartel.errors.count, "error") %> prohibited this quartel from being saved:</h2>
+
+      <ul>
+      <% quartel.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

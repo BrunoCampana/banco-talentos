@@ -1,0 +1,169 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  activerecord:
+    models:
+      areaatuacao:
+        one: "Área de atuação"
+        other: "Áreas de atuação"
+      cargoocupado:
+        one: "Cargo exercido"
+        other: "Cargos exercidos"
+      certificacao:
+        one: "Certificação"
+        other: "Certificações"
+      cidade:
+        one: "Cidade"
+        other: "Cidades"
+      curso:
+        one: "Curso"
+        other: "Cursos"
+      formacaoacad:
+        one: "Formação Acadêmica"
+        other: "Formações Acadêmicas"
+      formmilitar:
+        one: "Formação Militar"
+        other: "Formações Militares"
+      habilidade:
+        one: "Habilidade"
+        other: "Habilidades"
+      idioma:
+        one: "Idioma"
+        other: "Idiomas"
+      quartel:
+        one: "Organização"
+        other: "Organização"
+      talento:
+        one: "Talento"
+        other: "Talentos"
+    attributes:
+      areaatuacao:
+        titulo: "Título"
+        talentos: "Talentos que trabalharam na área"
+      cargoocupado:
+        titulo: "Título do cargo"
+        descricao: "Descrição do cargo"
+        inicio: "Início do período no cargo"
+        termino: "Término do período no cargo"
+        talentos: "Talentos que exerceram o cargo"
+      certificacao:
+        titulo: "Título da certificação"
+        area: "Área da certificação"
+        talentos: "Talentos que possuem a certificação"
+        ano_obtencao: "Ano de obtenção"
+      cidade:
+        nome: "Nome"
+        talentos: "Talentos residentes na cidade"
+      curso:
+        titulo: "Título do curso"
+        quando_ocorreu: "Período do curso"
+        quem_ministrou: "Organização que ministrou o curso"
+        carga_horaria: "Carga Horária (em hs)"
+        modalidade: "Modalidade"
+        talentos: "Talento que realizou o curso"
+      formacaoacad:
+        titulo: "Título"
+        instituicao: "Instituição"
+        nivel: "Nível"
+        ano_formacao: "Ano de formação"
+        talentos: "Talentos com essa formação"
+      formmilitar:
+        título: "Título"
+        talentos: "Militares que possuem a formação"
+      habilidade:
+        titulo: "Título"
+        area: "Área de conhecimento"
+        talentos: "Talentos com essa habilidade"
+      idioma:
+        lingua_nivel: "Proficiência linguística"
+        talentos: "Talentos com proficiência"
+      quartel:
+        nome: "Nome"
+        talentos: "Talentos desta OM"
+      talento:
+        nome_completo: "Nome completo"
+        foto: "Foto"
+        genero: "Gênero"
+        nascimento: "Data de nascimento"
+        cpf: "CPF"
+        idt: "Identidade"
+        estado_civil: "Estado civil"
+        nome_pai: "Nome do pai"
+        nome_mae: "Nome da mãe"
+        pcd: "Portador(a) de deficiência?"
+        altura: "Altura"
+        peso: "Peso"
+        email: "Email pessoal"
+        celular: "Celular"
+        endereco: "Endereço residencial"
+        linkedin: "Linkedin ou website pessoal"
+        facebook: "Facebook"
+        instagram: "Instagram"
+        status_atual: "Situação atual"
+        curriculo: "Currículo"
+        cargos_pre_eb: "Experiência profissional pré serviço militar"
+        hierarquia: "Graduação ou patente"
+        ndg: "Nome de guerra"
+        data_praca: "Data de início nas Forças Armadas"
+        data_desligamento: "Data de desligamento das Forças Armadas"
+        assiduidade: "Assiduidade"
+        pontualidade: "Pontualidade"
+        disciplina: "Disciplina"
+        lideranca: "Liderança"
+        apresentacao: "Apresentação e postura"
+        dedicacao: "Dedicação"
+        iniciativa: "Iniciativa"
+        produtividade: "Produtividade"
+        comunicacao: "Comunicação"
+        estab_emocional: "Estabilidade emocional"
+        resistencia_fisica: "Resistência Física"
+        parecer_cmt: "Opinião do chefe imediato"
+        disponibilidade: "Disponibilidade"
+        pretensao_salario: "Pretensão salarial"
+        area_procurada: "Área que almeja trabalhar"
+        nivel_formacao_cargo: "Nível do cargo que almeja"
+        viajar: "Disponibilidade para viajar?"
+        mudar: "Disponibilidade para mudar-se de cidade?"
+        areaatuacaos: "Área de atuação"
+        cargoocupados: "Cargos ocupados no Exército"
+        certificacaos: "Certificações profissionais que possui"
+        cidade: "Cidade onde reside"
+        cursos: "Cursos que possui"
+        formacaoacads: "Formações Acadêmicas que possui"
+        formmilitar: "Formação Militar"
+        habilidades: "Habilidades que possui"
+        idiomas: "Idiomas fluentes"
+        quartel: "Quartel de origem"
+        idade: "Idade"
+        tmp_sv_militar: "Tempo de Serviço Militar"
+        idade: "Idade"
+        curriculo_file_name: "Auto descrição (espaço para o militar falar de si próprio)"

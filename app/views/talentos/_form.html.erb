@@ -1,0 +1,17 @@
+<%= form_with(model: talento, local: true) do |form| %>
+  <% if talento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(talento.errors.count, "error") %> prohibited this talento from being saved:</h2>
+
+      <ul>
+      <% talento.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Formmilitars</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @formmilitars.each do |formmilitar| %>
+      <tr>
+        <td><%= link_to 'Show', formmilitar %></td>
+        <td><%= link_to 'Edit', edit_formmilitar_path(formmilitar) %></td>
+        <td><%= link_to 'Destroy', formmilitar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Formmilitar', new_formmilitar_path %>

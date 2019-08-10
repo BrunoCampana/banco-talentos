@@ -1,0 +1,2 @@
+module AreaatuacaosHelper
+end

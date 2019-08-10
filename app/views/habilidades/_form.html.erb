@@ -1,0 +1,17 @@
+<%= form_with(model: habilidade, local: true) do |form| %>
+  <% if habilidade.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(habilidade.errors.count, "error") %> prohibited this habilidade from being saved:</h2>
+
+      <ul>
+      <% habilidade.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

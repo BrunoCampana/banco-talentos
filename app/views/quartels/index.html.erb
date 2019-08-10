@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Quartels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quartels.each do |quartel| %>
+      <tr>
+        <td><%= link_to 'Show', quartel %></td>
+        <td><%= link_to 'Edit', edit_quartel_path(quartel) %></td>
+        <td><%= link_to 'Destroy', quartel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Quartel', new_quartel_path %>
