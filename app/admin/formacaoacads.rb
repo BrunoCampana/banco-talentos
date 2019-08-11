@@ -28,6 +28,13 @@ ActiveAdmin.register Formacaoacad do
   end
   permit_params :formacaoacad_id, :titulo, :instituicao, :nivel, :ano_formacao, :talento_id
 
+  form do |f|
+    f.input :titulo
+    f.input :instituicao
+    f.input :nivel
+    f.input :ano_formacao, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
+  end
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

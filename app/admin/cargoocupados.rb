@@ -27,6 +27,14 @@ ActiveAdmin.register Cargoocupado do
   #belongs_to :talento
   permit_params :titulo, :descricao, :inicio, :termino,:cargoocupado_id, :talento_id
 
+  form do |f|
+    f.inputs do
+      f.input :titulo
+      f.input :descricao
+      f.input :inicio, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
+      f.input :termino, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
+    end
+  end
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

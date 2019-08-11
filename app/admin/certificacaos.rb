@@ -24,6 +24,12 @@ ActiveAdmin.register Certificacao do
   end
   permit_params :certificacao_id, :titulo, :area, :ano_obtencao, :talento_id
 
+  form do |f|
+    f.input :titulo
+    f.input :area
+    f.input :ano_obtencao, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
+  end
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

@@ -116,14 +116,14 @@ ActiveAdmin.register Talento do
       f.input :foto, :required => false, :as => :file
       f.input :nome_completo
       f.input :genero
-      f.input :nascimento, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2019-01-01", timepicker:false}
+      f.input :nascimento, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
       f.input :cidade
       f.input :cpf
       f.input :idt
       f.input :estado_civil
       f.input :nome_pai
       f.input :nome_mae
-      f.input :pcd
+      f.input :pcd #, :hint => "Example: ruby, rails, forms"
       f.input :altura
       f.input :peso
     end

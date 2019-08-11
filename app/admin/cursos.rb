@@ -27,6 +27,14 @@ ActiveAdmin.register Curso do
   #belongs_to :talento
   permit_params :curso_id, :titulo, :quando_ocorreu, :quem_ministrou, :carga_horaria, :modalidade, :talento_id
 
+  form do |f|
+    f.input :titulo
+    f.input :quando_ocorreu, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
+    f.input :carga_horaria
+    f.input :modalidade
+    f.input :quem_ministrou
+  end
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
