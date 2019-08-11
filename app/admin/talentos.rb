@@ -9,7 +9,7 @@ ActiveAdmin.register Talento do
     actions
   end
 
-  filter :nome_completo_cont, label: "Para não usar um filtro em sua busca, apenas deixe-o em branco_____________ Nome Completo"
+  filter :nome_completo_cont, label: "------Para não usar um filtro em sua busca, apenas deixe-o em branco------- Nome Completo"
   filter :genero, as: :check_boxes, collection: Talento.generos
   filter :idade
   filter :estado_civil, as: :check_boxes, collection: Talento.estado_civils
@@ -29,7 +29,7 @@ ActiveAdmin.register Talento do
           image_tag(talento.foto.url(:thumb))
         end
         row :nome_completo
-        row :nascimento
+        row :nascimento #, :as => :just_datetime_picker
         row :idade
         row :genero
         row :cidade
@@ -74,8 +74,8 @@ ActiveAdmin.register Talento do
         row :ndg
         row :quartel
         row :formmilitar
-        row :data_praca
-        row :data_desligamento
+        row :data_praca #, :as => :just_datetime_picker
+        row :data_desligamento #, :as => :just_datetime_picker
         row :tmp_sv_militar
       end
     end

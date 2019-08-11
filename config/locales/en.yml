@@ -32,6 +32,9 @@
 en:
   activerecord:
     models:
+      admin_user:
+        one: "Usuário do Sistema"
+        other: "Usuários do Sistema"
       areaatuacao:
         one: "Área de atuação"
         other: "Áreas de atuação"
@@ -66,6 +69,15 @@ en:
         one: "Talento"
         other: "Talentos"
     attributes:
+      admin_user:
+        nome: "Nome do usuário"
+        tipo: "Tipo de usuário"
+        status: "Status"
+        email: "Email"
+        quartel: "Organização militar a que pertence"
+        current_sign_in_at: "Data do último acesso"
+        sign_in_count: "Quantas vezes acessou a plataforma"
+        created_at: "Quando foi criado"
       areaatuacao:
         titulo: "Título"
         talentos: "Talentos que trabalharam na área"

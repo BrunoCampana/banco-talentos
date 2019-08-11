@@ -3,4 +3,5 @@ class Quartel < ApplicationRecord
     nome
   end
   has_many :talentos
+  has_many :admin_users
 end

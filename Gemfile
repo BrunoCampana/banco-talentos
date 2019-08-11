@@ -65,3 +65,7 @@ gem 'paperclip'
 gem 'activeadmin'
 gem 'devise'
 gem 'cancancan'
+
+gem 'just-datetime-picker'
+
+#gem 'active_admin_role'

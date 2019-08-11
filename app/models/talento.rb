@@ -43,18 +43,29 @@ class Talento < ApplicationRecord
   accepts_nested_attributes_for :formacaoacads, allow_destroy: true
 
   def idade
-    if ((Time.now.month>=self.nascimento.month)and(Time.now.day>=self.nascimento.day))
-      idade = (Time.now.year - self.nascimento.year).to_s + ' anos'
-    else
-      idade = ((Time.now.year - self.nascimento.year).to_i - 1).to_s + ' anos'
+    if self.nascimento != nil
+      if ((Time.now.month>=self.nascimento.month)and(Time.now.day>=self.nascimento.day))
+        idade = (Time.now.year - self.nascimento.year).to_s + ' anos'
+      else
+        idade = ((Time.now.year - self.nascimento.year).to_i - 1).to_s + ' anos'
+      end
     end
   end
 
   def tmp_sv_militar
-    if (Time.now.month >= self.data_praca.month)
-      tmp_sv_militar = ((Time.now.year - self.data_praca.year).to_i + 1).to_s + ' anos'
-    else
-      tmp_sv_militar = (Time.now.year - self.data_praca.year).to_s + ' anos'
+    if self.data_praca != nil
+      if (Time.now.month >= self.data_praca.month)
+        tmp_sv_militar = ((Time.now.year - self.data_praca.year).to_i + 1).to_s + ' anos'
+      else
+        tmp_sv_militar = (Time.now.year - self.data_praca.year).to_s + ' anos'
+      end
     end
   end
+
+  #just_define_datetime_picker :nascimento, :add_to_attr_accessor => true
+  #validates :nascimento, :presence => true
+  #just_define_datetime_picker :data_praca, :add_to_attr_accessor => true
+  #validates :data_praca, :presence => true
+  #just_define_datetime_picker :data_desligamento, :add_to_attr_accessor => true
+  #validates :data_desligamento, :presence => true
 end
