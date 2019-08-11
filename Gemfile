@@ -67,3 +67,5 @@ gem 'devise'
 gem 'cancancan'
 
 gem 'active_admin_datetimepicker'
+
+gem 'active_admin_filters_visibility', git: 'https://github.com/activeadmin-plugins/active_admin_filters_visibility'

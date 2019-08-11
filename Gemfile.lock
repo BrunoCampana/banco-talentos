@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/activeadmin-plugins/active_admin_filters_visibility
+  revision: b851bdcb4955161948325112a5bca336db8398fc
+  specs:
+    active_admin_filters_visibility (1.2.0)
+      activeadmin
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -288,6 +295,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_admin_datetimepicker
+  active_admin_filters_visibility!
   activeadmin
   bootsnap (>= 1.1.0)
   byebug
