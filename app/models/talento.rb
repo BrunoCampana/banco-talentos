@@ -61,11 +61,4 @@ class Talento < ApplicationRecord
       end
     end
   end
-
-  #just_define_datetime_picker :nascimento, :add_to_attr_accessor => true
-  #validates :nascimento, :presence => true
-  #just_define_datetime_picker :data_praca, :add_to_attr_accessor => true
-  #validates :data_praca, :presence => true
-  #just_define_datetime_picker :data_desligamento, :add_to_attr_accessor => true
-  #validates :data_desligamento, :presence => true
 end

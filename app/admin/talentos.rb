@@ -29,7 +29,7 @@ ActiveAdmin.register Talento do
           image_tag(talento.foto.url(:thumb))
         end
         row :nome_completo
-        row :nascimento #, :as => :just_datetime_picker
+        row :nascimento
         row :idade
         row :genero
         row :cidade
@@ -74,8 +74,8 @@ ActiveAdmin.register Talento do
         row :ndg
         row :quartel
         row :formmilitar
-        row :data_praca #, :as => :just_datetime_picker
-        row :data_desligamento #, :as => :just_datetime_picker
+        row :data_praca
+        row :data_desligamento
         row :tmp_sv_militar
       end
     end
@@ -116,7 +116,7 @@ ActiveAdmin.register Talento do
       f.input :foto, :required => false, :as => :file
       f.input :nome_completo
       f.input :genero
-      f.input :nascimento
+      f.input :nascimento, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2019-01-01", timepicker:false}
       f.input :cidade
       f.input :cpf
       f.input :idt
@@ -179,8 +179,8 @@ ActiveAdmin.register Talento do
       f.input :ndg
       f.input :quartel
       f.input :formmilitar
-      f.input :data_praca
-      f.input :data_desligamento
+      f.input :data_praca, as: :date_time_picker, datepicker_options: { min_date: "2005-01-1", max_date: "2030-01-01", timepicker:false}
+      f.input :data_desligamento, as: :date_time_picker, datepicker_options: { min_date: "2015-01-1", max_date: "2040-01-01", timepicker:false}
     end
     f.inputs "Conceito militar:" do
       f.input :assiduidade

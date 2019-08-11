@@ -66,6 +66,4 @@ gem 'activeadmin'
 gem 'devise'
 gem 'cancancan'
 
-gem 'just-datetime-picker'
-
-#gem 'active_admin_role'
+gem 'active_admin_datetimepicker'
