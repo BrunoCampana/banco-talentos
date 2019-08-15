@@ -3,7 +3,11 @@ ActiveAdmin.register Cidade do
   index do
     #selectable_column
     column :nome
-    actions
+    if current_admin_user.admin?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :nome_cont, label: 'Nome da cidade'
@@ -31,7 +35,7 @@ ActiveAdmin.register Cidade do
   #   permitted
   # end
   config.comments = false
-  menu priority: 10
-  menu parent: "Buscar por localidade", label:"Buscar por cidade de residência"
+  menu priority: 4
+  menu parent: "Buscas específicas", label:"Buscar por cidade de residência"
   config.sort_order = "nome"
 end

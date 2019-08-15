@@ -7,7 +7,7 @@ ActiveAdmin.register Curso do
     column :carga_horaria
     column :modalidade
     column :quem_ministrou
-    actions
+    actions :except => [:new]
   end
 
   filter :titulo_cont, label: 'Título do curso'
@@ -49,5 +49,5 @@ ActiveAdmin.register Curso do
   # end
   config.comments = false
   menu priority: 5
-  menu parent: "Buscar por capacitação", label:"Buscar por cursos que possui"
+  menu parent: "Buscas específicas", label:"Buscar por cursos que possui"
 end

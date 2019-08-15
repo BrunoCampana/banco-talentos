@@ -3,7 +3,11 @@ ActiveAdmin.register Formmilitar do
   index do
     #selectable_column
     column :titulo
-    actions
+    if current_admin_user.admin?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :titulo_cont, label: 'Título'
@@ -31,7 +35,7 @@ ActiveAdmin.register Formmilitar do
   #   permitted
   # end
   config.comments = false
-  menu priority: 8
-  menu parent: "Buscar por capacitação", label:"Buscar por formação militar"
+  menu priority: 12
+  menu parent: "Buscas específicas", label:"Buscar por formação militar"
   config.sort_order = "titulo"
 end

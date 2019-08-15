@@ -4,24 +4,12 @@ class Talento < ApplicationRecord
   end
   enum genero: ["Masculino", "Feminino", "Prefiro não declarar"]
   enum estado_civil: ["Solteiro", "Casado", "Separado", "Divorciado", "Viúvo", "Não informado"]
-  enum pcd: ["Não", "Sim"]
-  enum status_atual: ["Empregado no EB", "Desempregado", "Empregado fora do EB"]
-  enum hierarquia: ["Recruta", "Sd", "Cb", "3º Sgt", "Asp Of", "2º Ten", "1º Ten"]
-  enum assiduidade: ["Não observado", "Ruim", "Mediano", "Acima da média"]
-  enum pontualidade: [" Não observado", " Ruim", " Mediano", " Acima da média"]
-  enum disciplina: ["Não observado ", "Ruim ", "Mediano ", "Acima da média "]
-  enum lideranca: [" Não observado ", " Ruim ", " Mediano ", " Acima da média "]
-  enum apresentacao: ["  Não observado", "  Ruim", "  Mediano", "  Acima da média"]
-  enum dedicacao: ["Não observado  ", "Ruim  ", "Mediano  ", "Acima da média  "]
-  enum iniciativa: [" Não observado  ", " Ruim  ", " Mediano  ", " Acima da média  "]
-  enum produtividade: ["  Não observado ", "  Ruim ", "  Mediano ", "  Acima da média "]
-  enum comunicacao: ["  Não observado  ", "  Ruim  ", "  Mediano  ", "  Acima da média  "]
-  enum estab_emocional: ["   Não observado", "   Ruim", "   Mediano", "   Acima da média"]
-  enum resistencia_fisica: ["Não observado   ", "Ruim   ", "Mediano   ", "Acima da média   "]
+  enum pcd: [" Não ", " Sim "]
+  enum hierarquia: ["Soldado do Efetivo Variável (ano do serviço militar obrigatório)", "Soldado Efetivo Profissional", "Cabo", "3º Sargento", "Aspirante-a-Oficial", "2º Tenente", "1º Tenente"]
   enum disponibilidade: ["Qualquer uma", "Integral trabalhando final de semana", "Integral sem trabalhar finais de semana", "Noturna", "Madrugada", "Não informado "]
-  enum nivel_formacao_cargo: ["Qualquer um", "Médio comum", "Nível Técnico", "Superior"]
   enum viajar: ["Sim ", "Não ", "Talvez", "Não sei ", " Não informado"]
   enum mudar: ["Viável", "Inviável", "Talvez ", " Não sei ", " Não informado "]
+  enum cnh: ["Não possuo", "A", "B", "C", "D", "E", "AB", "AC", "AD", "AE"]
 
   has_and_belongs_to_many :areaatuacaos
   has_many :cargoocupados, :dependent => :delete_all
@@ -30,6 +18,7 @@ class Talento < ApplicationRecord
   has_many :formacaoacads, :dependent => :delete_all
   belongs_to :formmilitar
   has_and_belongs_to_many :habilidades
+  has_and_belongs_to_many :atributoafetivos
   has_and_belongs_to_many :idiomas
   belongs_to :quartel
   belongs_to :cidade
@@ -42,6 +31,10 @@ class Talento < ApplicationRecord
   accepts_nested_attributes_for :cursos, allow_destroy: true
   accepts_nested_attributes_for :formacaoacads, allow_destroy: true
 
+  def analisado_pelo_cmt
+    self.aval_cmt
+  end
+
   def idade
     if self.nascimento != nil
       if ((Time.now.month>=self.nascimento.month)and(Time.now.day>=self.nascimento.day))
@@ -53,12 +46,22 @@ class Talento < ApplicationRecord
   end
 
   def tmp_sv_militar
-    if self.data_praca != nil
+    if self.data_praca != nil and self.data_desligamento != nil
+      if (self.data_desligamento.month >= self.data_praca.month)
+        tmp_sv_militar = ((Time.now.year - self.data_praca.year).to_i + 1).to_s + ' anos'
+      else
+        tmp_sv_militar = (Time.now.year - self.data_praca.year).to_s + ' anos'
+      end
+    elsif self.data_praca != nil
       if (Time.now.month >= self.data_praca.month)
         tmp_sv_militar = ((Time.now.year - self.data_praca.year).to_i + 1).to_s + ' anos'
       else
         tmp_sv_militar = (Time.now.year - self.data_praca.year).to_s + ' anos'
       end
     end
+  end
+
+  def definir_om
+    self.quartel_id = current_admin_user.quartel_id
   end
 end

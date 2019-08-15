@@ -7,13 +7,13 @@ class Ability
     if user.tipo == 'Administrador'
       can :manage, :all
       can :export, :all
-    elsif user.tipo == 'Cadastrador de talentos'
+    elsif user.tipo == 'Cadastrador de talentos' or 'Comandante de OM'
       can :update, AdminUser, :id => user.id
       can :create, [Cargoocupado, Certificacao, Curso, Formacaoacad, Talento]
       can [:update, :destroy], Talento, :quartel_id => user.quartel.id
       can :read, :all
       can :export, :all
-    else
+    elsif user.tipo == 'Recrutador de talentos'
       can :update, AdminUser, :id => user.id
       can :read, :all
       can :export, :all

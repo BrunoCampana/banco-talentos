@@ -3,25 +3,39 @@ ActiveAdmin.register Talento do
   index do
     #selectable_column
     column :hierarquia
-    column :nome_completo
-    column :celular
-    column :email
-    actions
+    column :ndg
+    toggle_bool_column :contratacao_imediata, success_message: 'Perfil atualizado com sucesso!'
+    column :cidade
+    bool_column :analisado_pelo_cmt
+    if current_admin_user.cmt?
+      toggle_bool_column :aval_cmt, success_message: 'Perfil atualizado com sucesso!'
+    end
+    if current_admin_user.milico?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
-  filter :nome_completo_cont, label: "------Para não usar um filtro em sua busca, apenas deixe-o em branco------- Nome Completo"
+  filter :ndg_cont, label: "Para não usar um filtro em sua busca, apenas deixe-o em branco ou desligue-o nos checkboxes Nome de guerra"
+  filter :cidade
+  filter :contratacao_imediata
+  filter :cnh, as: :check_boxes, collection: Talento.cnhs
   filter :genero, as: :check_boxes, collection: Talento.generos
-  filter :idade
-  filter :estado_civil, as: :check_boxes, collection: Talento.estado_civils
   filter :pcd, as: :check_boxes, collection: Talento.pcds
-  filter :status_atual, as: :check_boxes, collection: Talento.status_atuals
-  filter :hierarquia, as: :check_boxes, collection: Talento.hierarquia
-  filter :ndg_cont, label: 'Nome de guerra'
   filter :disponibilidade, as: :check_boxes, collection: Talento.disponibilidades
   filter :viajar, as: :check_boxes, collection: Talento.viajars
   filter :mudar, as: :check_boxes, collection: Talento.mudars
-  filter :cidade
-
+  filter :habilidades, as: :searchable_select, multiple: true
+  filter :formacaoacads, as: :searchable_select, multiple: true
+  filter :cursos, as: :searchable_select, multiple: true
+  filter :certificacaos, as: :searchable_select, multiple: true
+  filter :atributoafetivos, as: :searchable_select, multiple: true
+  #filter :idade, as: :numeric_range_filter
+  filter :hierarquia, as: :searchable_select, multiple: true
+  #filter :tmp_sv_militar, as: :numeric_range_filter
+  filter :bairro_cont, label: 'Bairro'
+  filter :idiomas, as: :searchable_select, multiple: true
   show do |talento|
     panel 'Informações básicas' do
       attributes_table_for talento do
@@ -32,15 +46,12 @@ ActiveAdmin.register Talento do
         row :nascimento
         row :idade
         row :genero
-        row :cidade
         row :cpf
         row :idt
         row :estado_civil
         row :nome_pai
         row :nome_mae
         row :pcd
-        row :altura
-        row :peso
       end
     end
 
@@ -48,6 +59,8 @@ ActiveAdmin.register Talento do
       attributes_table_for talento do
         row :email
         row :celular
+        row :cidade
+        row :bairro
         row :endereco
         row :linkedin
         row :facebook
@@ -55,20 +68,26 @@ ActiveAdmin.register Talento do
       end
     end
 
-    panel 'Informações de treinamento e experiência' do
+    panel 'Treinamento formal' do
       attributes_table_for talento do
-        row :status_atual
         row :formacaoacads
-        row :areaatuacaos
-        row :habilidades
         row :cursos
-        row :cargoocupados
-        row :cargos_pre_eb
         row :certificacaos
+        row :cnh
       end
     end
 
-    panel 'Informações militares' do
+    panel 'Experiência profissional prática' do
+      attributes_table_for talento do
+        row :areaatuacaos
+        row :habilidades, :hint => "Habilidades que o militar exerceu na prática por período maior que 1 ano"
+        row :cargos_pre_eb
+        row :cargoocupados
+        row :idiomas
+      end
+    end
+
+    panel 'Carreira militar' do
       attributes_table_for talento do
         row :hierarquia
         row :ndg
@@ -80,130 +99,118 @@ ActiveAdmin.register Talento do
       end
     end
 
-    panel 'Conceito militar' do
+    panel 'Opinião do chefe direto' do
       attributes_table_for talento do
-        row :assiduidade
-        row :pontualidade
-        row :disciplina
-        row :lideranca
-        row :apresentacao
-        row :dedicacao
-        row :iniciativa
-        row :produtividade
-        row :comunicacao
-        row :estab_emocional
-        row :resistencia_fisica
-        row :parecer_cmt
+        row :atributoafetivos
+        row :nome_referencia
+        row :cel_referencia
+        row :email_referencia
+        bool_row :analisado_pelo_cmt
       end
     end
 
     panel 'Expectativas profissionais' do
       attributes_table_for talento do
+        row :contratacao_imediata
+        row :quando_disponivel
         row :disponibilidade
-        row :pretensao_salario
-        row :area_procurada
-        row :nivel_formacao_cargo
         row :viajar
         row :mudar
       end
     end
   end
 
-  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :altura, :peso, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :status_atual, :cargos_pre_eb, :hierarquia, :ndg, :data_praca, :data_desligamento, :assiduidade, :pontualidade, :disciplina, :lideranca, :apresentacao, :dedicacao, :iniciativa, :produtividade, :comunicacao, :estab_emocional, :resistencia_fisica, :parecer_cmt, :disponibilidade, :pretensao_salario, :area_procurada, :nivel_formacao_cargo, :viajar, :mudar, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, areaatuacao_ids: [], habilidade_ids: [], idioma_ids: [], cargoocupados_attributes: [:id, :titulo, :inicio, :termino, :descricao, :_destroy], certificacaos_attributes: [:id, :_destroy, :titulo, :area, :ano_obtencao], cursos_attributes: [:id, :_destroy, :titulo, :quando_ocorreu, :quem_ministrou, :carga_horaria, :modalidade], formacaoacads_attributes: [:id, :_destroy, :titulo, :instituicao, :nivel, :ano_formacao]
+  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :nome_referencia, :cel_referencia, :email_referencia, :cnh, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupados_attributes: [:id, :titulo, :inicio, :termino, :descricao, :_destroy], certificacaos_attributes: [:id, :_destroy, :titulo, :area, :ano_obtencao], cursos_attributes: [:id, :_destroy, :titulo, :quando_ocorreu, :quem_ministrou, :carga_horaria, :modalidade], formacaoacads_attributes: [:id, :_destroy, :titulo, :instituicao, :nivel, :ano_formacao]
 
   form html: { multipart: true } do |f|
-    f.inputs "Informações Pessoais:" do
-      f.input :foto, :required => false, :as => :file
-      f.input :nome_completo
+    f.inputs "Informações Pessoais" do
+      f.input :foto, :required => false, :as => :file, :hint => image_tag(f.object.foto.url(:thumb))
+      f.input :nome_completo, :hint => "Por extenso, sem abreviações, apenas letras e todas maiúsculas. Ex: ALAN MATHISON TURING"
       f.input :genero
-      f.input :nascimento, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
-      f.input :cidade
-      f.input :cpf
-      f.input :idt
+      f.input :nascimento, as: :date_time_picker, picker_options: { min_date: Date.current - 50.years, max_date: Date.current - 17.years, timepicker:false}
+      f.input :cpf, :hint => "Insira somente números, todos juntos, sem traços e pontos separadores. Ex: 11122233344"
+      f.input :idt, :hint => "Insira com traço separador e indicando órgão expedidor. Ex: 010022343-88 / EB"
       f.input :estado_civil
-      f.input :nome_pai
-      f.input :nome_mae
-      f.input :pcd #, :hint => "Example: ruby, rails, forms"
-      f.input :altura
-      f.input :peso
+      f.input :nome_pai, :hint => "Por extenso, sem abreviações, apenas letras e todas maiúsculas. Ex: ALBERT ENSTEIN"
+      f.input :nome_mae, :hint => "Por extenso, sem abreviações, apenas letras e todas maiúsculas. Ex: JAMES CLERK MAXWELL"
+      f.input :pcd
     end
-    f.inputs "Informações de contato:" do
-      f.input :email
-      f.input :celular
-      f.input :endereco
-      f.input :linkedin
-      f.input :facebook
-      f.input :instagram
+    f.inputs "Informações de contato" do
+      f.input :email, :hint => "Ex: meuemail@algumprovedor.com"
+      f.input :celular, :hint => "Apenas números, todos juntos. Ex:9299911133"
+      f.input :cidade, input_html: { class: "select2" }
+      f.input :bairro, :hint => "Ex: Cidade Nova"
+      f.input :endereco, :hint => "Não precisa pôr cidade e bairro, apenas logadouro, número e complementos. Ex: Av Coronel Teixeira, 4715"
+      f.input :linkedin, :hint => "Caso use esta rede social, colocar o endereço de seu perfil. Ex: linkedin.com/in/engbrunocampana/"
+      f.input :facebook, :hint => "Caso use esta rede social, colocar o endereço de seu perfil. Ex: facebook.com/brunorcampana"
+      f.input :instagram, :hint => "Caso use esta rede social, colocar o endereço de seu perfil. Ex: @brunoramoscampana"
     end
-    f.inputs "Informações de treinamento e experiência:" do
-      f.input :status_atual
-      f.input :cargos_pre_eb
-      f.input :habilidades, :as => :select
+    f.inputs "Treinamento formal" do
       f.inputs do
         f.has_many :formacaoacads, heading: 'Formação Acadêmica', allow_destroy: true, new_record: true do |a|
-          a.input :titulo
-          a.input :instituicao
+          a.input :titulo, :hint => "Exemplos: Bacharel em Direito; Ensino Médio Técnico em Eletrônica; Ensino Médio Comum; etc"
+          a.input :instituicao, :hint => "Se for faculdade, inserir apenas a sigla em maiúsculo: UFAM, UEA, UNIP, etc"
           a.input :nivel
-          a.input :ano_formacao
+          a.input :ano_formacao, as: :date_time_picker, picker_options: { min_date: Date.current - 30.years, max_date: Date.current, timepicker:false}, :hint => "Não se preocupe caso não lembrar do dia e mês de formação"
         end
-      end
-      f.inputs do
-        f.has_many :cursos, heading: 'Cursos que possui', allow_destroy: true, new_record: true do |a|
-          a.input :titulo
-          a.input :carga_horaria
-          a.input :modalidade
-          a.input :quem_ministrou
-          a.input :quando_ocorreu, label: "Quando curso foi ministrado"
+        f.inputs do
+          f.has_many :cursos, heading: 'Cursos que possui', allow_destroy: true, new_record: true do |a|
+            a.input :titulo, :hint => "Exemplos: Manutenção de Ar Condicionados"
+            a.input :carga_horaria
+            a.input :modalidade
+            a.input :quem_ministrou, :hint => "Indique o nome da instituição que ministrou. Ex: SENAI"
+            a.input :quando_ocorreu, as: :date_time_picker, picker_options: { min_date: Date.current - 30.years, max_date: Date.current, timepicker:false}, label: "Quando curso foi ministrado"
+          end
         end
+        f.inputs do
+          f.has_many :certificacaos, heading: 'Certificações que possui', allow_destroy: true, new_record: true do |a|
+            a.input :titulo, :hint => "Provas teóricas realizadas que comprovam conhecimento em determinada área (mais comuns na área de TI). Exemplo: Cambridge Certificate of English, Furukawa Master, PMP, etc"
+            a.input :area
+            a.input :ano_obtencao, as: :date_time_picker, picker_options: { min_date: Date.current - 30.years, max_date: Date.current, timepicker:false}
+          end
+        end
+      f.input :cnh
       end
-      f.input :areaatuacaos, :as => :select
+    end
+    f.inputs "Experiência profissional prática" do
+      f.input :areaatuacaos, :hint => "Marque somente áreas de atuação em que possui experiência prática de período maior que 1 ano"
+      f.input :habilidades, :hint => "Habilidades que o militar exerceu na prática por período maior que 1 ano"
+      f.input :cargos_pre_eb, :hint => "Espaço para o militar descrever as organizações onde trabalhou, de quando a quando trabalhou nas mesmas e quais cargos exerceu nestas. Não exceder o espaço da caixa de texto."
       f.inputs do
         f.has_many :cargoocupados, heading: 'Cargos ocupados no período de sv militar', allow_destroy: true, new_record: true do |a|
-          a.input :titulo
-          a.input :descricao
+          a.input :titulo, :hint => "Ex: Adjunto à 3ª Seção"
+          a.input :descricao, :hint => "Auxiliar o S3 no planejamento das operações do quartel, realizando as atividades de elaboração de documentos de texto, planilhas e apresentações de slide"
           a.input :inicio
           a.input :termino
         end
       end
-      f.inputs do
-        f.has_many :certificacaos, heading: 'Certificações que possui', allow_destroy: true, new_record: true do |a|
-          a.input :titulo
-          a.input :area
-          a.input :ano_obtencao
-        end
-      end
-      f.input :idiomas, :as => :select
+      f.input :idiomas, :hint => "Marque quantas habilidades forem reais"
     end
-    f.inputs "Informações militares:" do
+
+    f.inputs "Carreira militar" do
       f.input :hierarquia
       f.input :ndg
-      f.input :quartel
-      f.input :formmilitar
-      f.input :data_praca, as: :date_time_picker, datepicker_options: { min_date: "2005-01-1", max_date: "2030-01-01", timepicker:false}
-      f.input :data_desligamento, as: :date_time_picker, datepicker_options: { min_date: "2015-01-1", max_date: "2040-01-01", timepicker:false}
+      f.input :quartel#, input_html: { class: "select2" }
+      :definir_om
+      f.input :formmilitar#, input_html: { class: "select2" }
+      f.input :data_praca, as: :date_time_picker, picker_options: { min_date: Date.current - 10.years, max_date: Date.current, timepicker:false}
+      f.input :data_desligamento, as: :date_time_picker, picker_options: { min_date: Date.current - 2.years, max_date: Date.current, timepicker:false}, :hint => "Deixe em branco se ainda está na ativa"
     end
-    f.inputs "Conceito militar:" do
-      f.input :assiduidade
-      f.input :pontualidade
-      f.input :disciplina
-      f.input :lideranca
-      f.input :apresentacao
-      f.input :dedicacao
-      f.input :iniciativa
-      f.input :produtividade
-      f.input :comunicacao
-      f.input :estab_emocional
-      f.input :resistencia_fisica
-      f.input :parecer_cmt
+    f.inputs "Opinião do chefe direto" do
+      f.input :atributoafetivos, label: "Marque apenas as 3 qualidades que o sr julga mais marcantes nesse militar", as: :check_boxes, :hint => "O chefe direto deverá marcar APENAS as 3 qualidades que julga mais marcantes"
+      f.input :nome_referencia
+      f.input :cel_referencia, :hint => "Insira apenas números. Ex: 92998111333"
+      f.input :email_referencia, :hint => "Ex: meuemail@dominio.com.br"
+      if current_admin_user.cmt?
+        f.input :aval_cmt, as: :boolean
+      end
     end
     f.inputs "Expectativas profissionais:" do
+      f.input :contratacao_imediata, as: :boolean
+      f.input :quando_disponivel
       f.input :disponibilidade
-      f.input :pretensao_salario
-      f.input :area_procurada
-      f.input :nivel_formacao_cargo
       f.input :viajar
       f.input :mudar
-      f.input :curriculo_file_name
     end
     f.actions
   end
@@ -220,5 +227,5 @@ ActiveAdmin.register Talento do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  menu priority: 2, label: "Talentos"
+  menu priority: 2, label: "Recrutar Talentos"
 end

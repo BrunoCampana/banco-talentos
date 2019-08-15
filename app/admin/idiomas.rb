@@ -3,7 +3,11 @@ ActiveAdmin.register Idioma do
   index do
     #selectable_column
     column :lingua_nivel
-    actions
+    if current_admin_user.admin?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :lingua_nivel_cont, label: 'Idioma'
@@ -31,6 +35,6 @@ ActiveAdmin.register Idioma do
   #   permitted
   # end
   config.comments = false
-  menu priority: 8
-  menu parent: "Buscar por capacitação", label:"Buscar por idiomas que fala"
+  menu priority: 13
+  menu parent: "Buscas específicas", label:"Buscar por idiomas que fala"
 end

@@ -6,7 +6,7 @@ ActiveAdmin.register Cargoocupado do
     column :descricao
     column :inicio
     column :termino
-    actions
+    actions :except => [:new]
   end
 
   filter :titulo_cont, label: 'Título do cargo'
@@ -49,5 +49,5 @@ ActiveAdmin.register Cargoocupado do
   # end
   config.comments = false
   menu priority: 5
-  menu parent: "Buscar por capacitação", label:"Buscar por cargos ocupados"
+  menu parent: "Buscas específicas", label:"Buscar por cargos ocupados"
 end

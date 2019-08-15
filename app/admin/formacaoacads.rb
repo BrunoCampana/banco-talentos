@@ -8,7 +8,7 @@ ActiveAdmin.register Formacaoacad do
     column :instituicao
     column :nivel
     column :ano_formacao
-    actions
+    actions :except => [:new]
   end
 
   filter :titulo_cont, label: 'Título'
@@ -49,5 +49,5 @@ ActiveAdmin.register Formacaoacad do
   # end
   config.comments = false
   menu priority: 7
-  menu parent: "Buscar por capacitação", label:"Buscar por formação acadêmica"
+  menu parent: "Buscas específicas", label:"Buscar por formação acadêmica"
 end

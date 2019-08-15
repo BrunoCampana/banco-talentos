@@ -6,7 +6,7 @@ ActiveAdmin.register Certificacao do
     column :titulo
     column :area
     column :ano_obtencao
-    actions
+    actions :except => [:new]
   end
 
   filter :titulo_cont, label: 'Título'
@@ -43,6 +43,6 @@ ActiveAdmin.register Certificacao do
   #   permitted
   # end
   config.comments = false
-  menu priority: 9
-  menu parent: "Buscar por capacitação", label:"Buscar por Certificações que possui"
+  menu priority: 8
+  menu parent: "Buscas específicas", label:"Buscar por Certificações que possui"
 end

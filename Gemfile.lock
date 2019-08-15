@@ -36,6 +36,7 @@ GEM
       coffee-rails
       xdan-datetimepicker-rails (~> 2.5.4)
     active_admin_theme (1.1.0)
+    active_material (1.4.2)
     activeadmin (2.2.0)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (~> 3.1)
@@ -48,6 +49,17 @@ GEM
       sassc-rails (~> 2.1)
       sprockets (>= 3.0, < 4.1)
       sprockets-es6 (~> 0.9, >= 0.9.2)
+    activeadmin-searchable_select (1.2.0)
+      activeadmin (>= 1.x, < 3)
+      jquery-rails (>= 3.0, < 5)
+      select2-rails (~> 4.0)
+    activeadmin_addons (1.7.1)
+      active_material
+      railties
+      require_all (~> 1.5)
+      sass
+      select2-rails (~> 4.0)
+      xdan-datetimepicker-rails (~> 2.5.1)
     activejob (5.2.3)
       activesupport (= 5.2.3)
       globalid (>= 0.3.6)
@@ -223,6 +235,7 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     regexp_parser (1.6.0)
+    require_all (1.5.0)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -248,6 +261,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    select2-rails (4.0.3)
+      thor (~> 0.14)
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -303,6 +318,8 @@ DEPENDENCIES
   active_admin_filters_visibility!
   active_admin_theme
   activeadmin
+  activeadmin-searchable_select
+  activeadmin_addons
   bootsnap (>= 1.1.0)
   byebug
   cancancan

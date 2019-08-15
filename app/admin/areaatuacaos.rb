@@ -5,7 +5,11 @@ ActiveAdmin.register Areaatuacao do
   index do
     #selectable_column
     column :titulo
-    actions
+    if current_admin_user.admin?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :titulo_cont, label: 'Título'
@@ -32,8 +36,8 @@ ActiveAdmin.register Areaatuacao do
   #   permitted
   # end
   config.comments = false
-  menu priority: 3
-  menu parent: "Buscar por capacitação", label:"Buscar por área de atuação"
+  menu priority: 10
+  menu parent: "Buscas específicas", label:"Buscar por área de atuação"
 
   config.sort_order = "titulo"
 end

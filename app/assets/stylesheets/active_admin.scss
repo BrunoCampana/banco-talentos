@@ -1,3 +1,4 @@
+@import 'activeadmin_addons/all';
 // SASS variable overrides must be declared before loading up Active Admin's styles.
 //
 // To view the variables that Active Admin provides, take a look at
@@ -11,6 +12,32 @@
 @import "active_admin/mixins";
 @import "active_admin/base";
 @import "active_admin_datetimepicker";
+@import "active_admin/searchable_select";
+
+//@import "active_admin_flat_skin";
+//@import "font-awesome";
+
+//@import 'activeadmin_addons/material';
+
+$nao-color: #FF0000;
+$sim-color: #08A510;
+
+.contratacao_imediata_tag {
+  &.nao { background: $nao-color; }
+  &.sim { background: $sim-color; }
+}
+
+.bool-value {
+  font-size: 12px;
+
+  &.true-value {
+    color: #08A510;
+  }
+
+  &.false-value {
+    color: #FF0000;
+  }
+}
 
 $skinMainFirstColor: #23282f!default;
 $skinMainSecondColor: #5ea3d3!default;

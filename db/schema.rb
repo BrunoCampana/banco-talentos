@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_130404) do
+ActiveRecord::Schema.define(version: 2019_08_15_204705) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -54,6 +54,19 @@ ActiveRecord::Schema.define(version: 2019_08_11_130404) do
     t.integer "talento_id", null: false
     t.index ["areaatuacao_id"], name: "index_areaatuacaos_talentos_on_areaatuacao_id"
     t.index ["talento_id"], name: "index_areaatuacaos_talentos_on_talento_id"
+  end
+
+  create_table "atributoafetivos", force: :cascade do |t|
+    t.string "titulo", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "atributoafetivos_talentos", id: false, force: :cascade do |t|
+    t.integer "atributoafetivo_id", null: false
+    t.integer "talento_id", null: false
+    t.index ["atributoafetivo_id"], name: "index_atributoafetivos_talentos_on_atributoafetivo_id"
+    t.index ["talento_id"], name: "index_atributoafetivos_talentos_on_talento_id"
   end
 
   create_table "cargoocupados", force: :cascade do |t|
@@ -107,7 +120,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_130404) do
   end
 
   create_table "formmilitars", force: :cascade do |t|
-    t.string "titulo", default: "Instrução Básica e-ou Qualificação", null: false
+    t.string "titulo", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -148,42 +161,23 @@ ActiveRecord::Schema.define(version: 2019_08_11_130404) do
     t.string "nome_completo", null: false
     t.integer "genero", default: 0
     t.date "nascimento"
-    t.string "cpf"
     t.string "idt"
     t.integer "estado_civil", default: 0
     t.string "nome_pai"
     t.string "nome_mae"
     t.integer "pcd", default: 0
-    t.string "altura"
-    t.string "peso"
     t.string "email"
     t.string "celular"
     t.string "endereco"
     t.string "linkedin"
     t.string "facebook"
     t.string "instagram"
-    t.integer "status_atual", default: 0
     t.text "cargos_pre_eb"
     t.integer "hierarquia", default: 0
     t.string "ndg"
     t.date "data_praca"
     t.date "data_desligamento"
-    t.integer "assiduidade", default: 0
-    t.integer "pontualidade", default: 0
-    t.integer "disciplina", default: 0
-    t.integer "lideranca", default: 0
-    t.integer "apresentacao", default: 0
-    t.integer "dedicacao", default: 0
-    t.integer "iniciativa", default: 0
-    t.integer "produtividade", default: 0
-    t.integer "comunicacao", default: 0
-    t.integer "estab_emocional", default: 0
-    t.integer "resistencia_fisica", default: 0
-    t.text "parecer_cmt"
     t.integer "disponibilidade", default: 0
-    t.string "pretensao_salario"
-    t.string "area_procurada"
-    t.integer "nivel_formacao_cargo", default: 0
     t.integer "viajar", default: 0
     t.integer "mudar", default: 0
     t.datetime "created_at", null: false
@@ -193,12 +187,21 @@ ActiveRecord::Schema.define(version: 2019_08_11_130404) do
     t.integer "quartel_id"
     t.string "foto_file_name"
     t.string "foto_content_type"
-    t.bigint "foto_file_size"
+    t.integer "foto_file_size"
     t.datetime "foto_updated_at"
     t.string "curriculo_file_name"
     t.string "curriculo_content_type"
-    t.bigint "curriculo_file_size"
+    t.integer "curriculo_file_size"
     t.datetime "curriculo_updated_at"
+    t.string "bairro"
+    t.string "quando_disponivel"
+    t.string "nome_referencia"
+    t.string "cel_referencia"
+    t.string "email_referencia"
+    t.integer "cpf"
+    t.boolean "aval_cmt", default: false
+    t.integer "cnh", default: 0
+    t.boolean "contratacao_imediata", default: false
     t.index ["cidade_id"], name: "index_talentos_on_cidade_id"
     t.index ["formmilitar_id"], name: "index_talentos_on_formmilitar_id"
     t.index ["quartel_id"], name: "index_talentos_on_quartel_id"

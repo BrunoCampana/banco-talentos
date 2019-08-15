@@ -4,7 +4,12 @@ class TalentosController < ApplicationController
   # GET /talentos
   # GET /talentos.json
   def index
-    @talentos = Talento.all
+    if current_admin_user.admin?
+      @talentos = Talento.all
+    elsif current_admin_user.recrutador?
+      @talentos = Talento.where(:aval_cmt => true)
+    else
+      @talentos = Talento.where(quartel_id==current_admin_user.quartel_id)
   end
 
   # GET /talentos/1
@@ -25,7 +30,7 @@ class TalentosController < ApplicationController
   # POST /talentos.json
   def create
     @talento = Talento.new(talento_params)
-
+    @talento.quartel = current_admin_user.quartel
     respond_to do |format|
       if @talento.save
         format.html { redirect_to @talento, notice: 'Talento was successfully created.' }

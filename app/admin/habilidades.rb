@@ -3,7 +3,11 @@ ActiveAdmin.register Habilidade do
   index do
     #selectable_column
     column :titulo
-    actions
+    if current_admin_user.admin?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :titulo_cont, label: 'Habilidade'
@@ -31,7 +35,7 @@ ActiveAdmin.register Habilidade do
   #   permitted
   # end
   config.comments = false
-  menu priority: 4
-  menu parent: "Buscar por capacitação", label:"Buscar por habilidades que possui"
+  menu priority: 6
+  menu parent: "Buscas específicas", label:"Buscar por habilidades que possui"
   config.sort_order = "titulo"
 end

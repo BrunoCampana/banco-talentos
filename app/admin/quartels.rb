@@ -3,7 +3,11 @@ ActiveAdmin.register Quartel do
   index do
     #selectable_column
     column :nome
-    actions
+    if current_admin_user.admin?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :nome_cont, label: 'Organização Militar'
@@ -31,7 +35,7 @@ ActiveAdmin.register Quartel do
   #   permitted
   # end
   config.comments = false
-  menu priority: 10
-  menu parent: "Buscar por localidade", label:"Buscar por organizações militares"
+  menu priority: 15
+  menu parent: "Buscas específicas", label:"Buscar por organizações militares"
   config.sort_order = "nome"
 end

@@ -72,3 +72,8 @@ gem 'active_admin_filters_visibility', git: 'https://github.com/activeadmin-plug
 gem 'active_admin_theme'
 
 gem 'dotenv-rails'
+#gem 'active_admin_flat_skin'
+#gem 'font-awesome-rails'
+
+gem 'activeadmin_addons'
+gem 'activeadmin-searchable_select'
