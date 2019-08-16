@@ -1,5 +1,13 @@
 ActiveAdmin.register Cidade do
-
+  controller do
+    def action_methods
+      if current_admin_user.recrutador?
+        super - ['destroy', 'new', 'create', 'show']
+      else
+        super
+      end
+    end
+  end
   index do
     #selectable_column
     column :nome

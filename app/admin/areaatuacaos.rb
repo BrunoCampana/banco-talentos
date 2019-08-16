@@ -1,7 +1,15 @@
 ActiveAdmin.register Areaatuacao do
 
- permit_params :titulo, :areaatuacao_id, talento_ids: []
-
+  permit_params :titulo, :areaatuacao_id, talento_ids: []
+  controller do
+    def action_methods
+      if current_admin_user.recrutador?
+        super - ['destroy', 'new', 'create', 'show']
+      else
+        super
+      end
+    end
+  end
   index do
     #selectable_column
     column :titulo
