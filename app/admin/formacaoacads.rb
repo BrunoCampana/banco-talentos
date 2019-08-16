@@ -1,5 +1,5 @@
 ActiveAdmin.register Formacaoacad do
-
+  config.remove_action_item(:new)
   #belongs_to :talento
 
   index do

@@ -1,6 +1,7 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id
-  menu if: proc{ current_admin_user.admin? }
+  menu :if => proc{ current_admin_user.admin? }
+
   index do
     selectable_column
     id_column
@@ -53,5 +54,5 @@ ActiveAdmin.register AdminUser do
     f.actions
   end
 
-  menu priority: 11
+  #menu priority: 11
 end

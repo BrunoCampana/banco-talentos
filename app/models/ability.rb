@@ -4,16 +4,16 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.tipo == 'Administrador'
+    if user.tipo == 'Admin'
       can :manage, :all
       can :export, :all
-    elsif user.tipo == 'Cadastrador de talentos' or 'Comandante de OM'
+    elsif user.tipo == 'CmtOM' or 'Cadastrador'
       can :update, AdminUser, :id => user.id
       can :create, [Cargoocupado, Certificacao, Curso, Formacaoacad, Talento]
       can [:update, :destroy], Talento, :quartel_id => user.quartel.id
       can :read, :all
       can :export, :all
-    elsif user.tipo == 'Recrutador de talentos'
+    elsif user.tipo == 'Recrutador'
       can :update, AdminUser, :id => user.id
       can :read, :all
       can :export, :all

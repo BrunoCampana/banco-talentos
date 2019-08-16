@@ -1,5 +1,5 @@
 ActiveAdmin.register Curso do
-
+  config.remove_action_item(:new)
   index do
     #selectable_column
     column :titulo

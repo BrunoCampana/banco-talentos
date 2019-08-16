@@ -1,5 +1,25 @@
 ActiveAdmin.register Talento do
 
+  controller do
+    def action_methods
+      if current_admin_user.recrutador?
+        super - ['destroy', 'new', 'create']
+      else
+        super
+      end
+    end
+  end
+
+  scope :perfis, :default => true do |talentos|
+    if current_admin_user.admin?
+      talentos.all
+    elsif current_admin_user.recrutador?
+      talentos.where(:aval_cmt => true)
+    else
+      talentos.where(:quartel_id => current_admin_user.quartel_id)
+    end
+  end
+
   index do
     #selectable_column
     column :hierarquia
@@ -10,11 +30,7 @@ ActiveAdmin.register Talento do
     if current_admin_user.cmt?
       toggle_bool_column :aval_cmt, success_message: 'Perfil atualizado com sucesso!'
     end
-    if current_admin_user.milico?
-      actions
-    else
-      actions :except => [:new]
-    end
+    actions
   end
 
   filter :ndg_cont, label: "Para não usar um filtro em sua busca, apenas deixe-o em branco ou desligue-o nos checkboxes Nome de guerra"
@@ -31,9 +47,7 @@ ActiveAdmin.register Talento do
   filter :cursos, as: :searchable_select, multiple: true
   filter :certificacaos, as: :searchable_select, multiple: true
   filter :atributoafetivos, as: :searchable_select, multiple: true
-  #filter :idade, as: :numeric_range_filter
   filter :hierarquia, as: :searchable_select, multiple: true
-  #filter :tmp_sv_militar, as: :numeric_range_filter
   filter :bairro_cont, label: 'Bairro'
   filter :idiomas, as: :searchable_select, multiple: true
   show do |talento|
@@ -191,7 +205,6 @@ ActiveAdmin.register Talento do
       f.input :hierarquia
       f.input :ndg
       f.input :quartel#, input_html: { class: "select2" }
-      :definir_om
       f.input :formmilitar#, input_html: { class: "select2" }
       f.input :data_praca, as: :date_time_picker, picker_options: { min_date: Date.current - 10.years, max_date: Date.current, timepicker:false}
       f.input :data_desligamento, as: :date_time_picker, picker_options: { min_date: Date.current - 2.years, max_date: Date.current, timepicker:false}, :hint => "Deixe em branco se ainda está na ativa"
@@ -229,3 +242,17 @@ ActiveAdmin.register Talento do
   # end
   menu priority: 2, label: "Recrutar Talentos"
 end
+#@talentos = Talento.where("ndg = 'Valentim'")
+#if current_admin_user.admin?
+#  @talentos = Talento.all
+#elsif current_admin_user.recrutador?
+#  @talentos = Talento.where(aval_cmt: true)
+#else
+#  @talentos = Talento.where(quartel_id==current_admin_user.quartel_id)
+#@talento.quartel = current_admin_user.quartel
+
+#controller do
+#    def find_resource
+#      scoped_collection.where(ndg: 'Valentim').first!
+#    end
+#end

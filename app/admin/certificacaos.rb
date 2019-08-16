@@ -1,6 +1,6 @@
 ActiveAdmin.register Certificacao do
   #belongs_to :talento
-
+  config.remove_action_item(:new)
   index do
     #selectable_column
     column :titulo
