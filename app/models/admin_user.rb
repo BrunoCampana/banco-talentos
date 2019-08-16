@@ -31,4 +31,7 @@ class AdminUser < ApplicationRecord
   def name
     nome
   end
+
+  validates :email, presence: true
+  validates :nome, presence: true
 end

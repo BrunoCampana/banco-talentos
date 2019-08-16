@@ -1,0 +1,17 @@
+<%= form_with(model: cnh, local: true) do |form| %>
+  <% if cnh.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cnh.errors.count, "error") %> prohibited this cnh from being saved:</h2>
+
+      <ul>
+      <% cnh.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

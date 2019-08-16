@@ -3,4 +3,5 @@ class Cidade < ApplicationRecord
     nome
   end
   has_many :talentos
+  validates :nome, presence: true
 end

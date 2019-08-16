@@ -1,6 +1,6 @@
 class Talento < ApplicationRecord
   def name
-    nome_completo
+    ndg
   end
   enum genero: ["Masculino", "Feminino", "Prefiro não declarar"]
   enum estado_civil: ["Solteiro", "Casado", "Separado", "Divorciado", "Viúvo", "Não informado"]
@@ -9,7 +9,6 @@ class Talento < ApplicationRecord
   enum disponibilidade: ["Qualquer uma", "Integral trabalhando final de semana", "Integral sem trabalhar finais de semana", "Noturna", "Madrugada", "Não informado "]
   enum viajar: ["Sim ", "Não ", "Talvez", "Não sei ", " Não informado"]
   enum mudar: ["Viável", "Inviável", "Talvez ", " Não sei ", " Não informado "]
-  enum cnh: ["Não possuo", "A", "B", "C", "D", "E", "AB", "AC", "AD", "AE"]
 
   has_and_belongs_to_many :areaatuacaos
   has_many :cargoocupados, :dependent => :delete_all
@@ -18,6 +17,7 @@ class Talento < ApplicationRecord
   has_many :formacaoacads, :dependent => :delete_all
   belongs_to :formmilitar
   has_and_belongs_to_many :habilidades
+  has_and_belongs_to_many :cnhs
   has_and_belongs_to_many :atributoafetivos
   has_and_belongs_to_many :idiomas
   belongs_to :quartel
@@ -61,7 +61,14 @@ class Talento < ApplicationRecord
     end
   end
 
-  def definir_om
-    self.quartel_id = current_admin_user.quartel_id
-  end
+  validates :nome_completo, presence: true
+  validates :email, presence: true
+  validates :celular, presence: true
+  validates :ndg, presence: true
+  validates :genero, presence: true
+  validates :pcd, presence: true
+  validates :hierarquia, presence: true
+  validates :disponibilidade, presence: true
+  validates :viajar, presence: true
+  validates :mudar, presence: true
 end

@@ -4,4 +4,5 @@ class Quartel < ApplicationRecord
   end
   has_many :talentos
   has_many :admin_users
+  validates :nome, presence: true
 end

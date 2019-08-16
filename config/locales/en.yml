@@ -41,6 +41,9 @@ en:
       cargoocupado:
         one: "Cargo exercido"
         other: "Cargos exercidos"
+      cnh:
+        one: "Carteira Nacional de Habilitação"
+        other: "Carteiras Nacionais de Habilitação"
       certificacao:
         one: "Certificação"
         other: "Certificações"
@@ -126,6 +129,8 @@ en:
       quartel:
         nome: "Nome"
         talentos: "Talentos desta OM"
+      cnh:
+        titulo: "Título"
       talento:
         nome_completo: "Nome completo"
         foto: "Foto"
@@ -170,6 +175,6 @@ en:
         nome_referencia: "Nome do último chefe direto"
         cel_referencia: "Celular de contato com o último chefe direto"
         email_referencia: "Email de contato com último chefe direto"
-        cnh: "Categoria da Carteira Nacional de Habilitação"
         atributoafetivos: "Qualidades observadas"
         analisado_pelo_cmt: "Perfil já aprovado pelo Cmt OM?"
+        cnhs: "CNH"

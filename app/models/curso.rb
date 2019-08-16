@@ -4,4 +4,5 @@ class Curso < ApplicationRecord
   end
   enum modalidade: ["À distância", "Presencial"]
   belongs_to :talento
+  validates :titulo, presence: true
 end

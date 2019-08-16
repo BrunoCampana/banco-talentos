@@ -34,14 +34,14 @@ ActiveAdmin.register Talento do
   end
 
   filter :ndg_cont, label: "Para não usar um filtro em sua busca, apenas deixe-o em branco ou desligue-o nos checkboxes Nome de guerra"
-  filter :cidade
+  filter :cidade, as: :searchable_select, multiple: true
   filter :contratacao_imediata
-  filter :cnh, as: :check_boxes, collection: Talento.cnhs
-  filter :genero, as: :check_boxes, collection: Talento.generos
-  filter :pcd, as: :check_boxes, collection: Talento.pcds
-  filter :disponibilidade, as: :check_boxes, collection: Talento.disponibilidades
-  filter :viajar, as: :check_boxes, collection: Talento.viajars
-  filter :mudar, as: :check_boxes, collection: Talento.mudars
+  filter :genero, as: :searchable_select#, as: :check_boxes, collection: Talento.generos
+  filter :pcd, as: :searchable_select#, as: :check_boxes, collection: Talento.pcds
+  filter :disponibilidade, as: :searchable_select#, as: :check_boxes, collection: Talento.disponibilidades
+  filter :viajar, as: :searchable_select#, as: :check_boxes, collection: Talento.viajars
+  filter :mudar, as: :searchable_select#, as: :check_boxes, collection: Talento.mudars
+  filter :cnhs, as: :searchable_select, multiple: true
   filter :habilidades, as: :searchable_select, multiple: true
   filter :formacaoacads, as: :searchable_select, multiple: true
   filter :cursos, as: :searchable_select, multiple: true
@@ -87,7 +87,7 @@ ActiveAdmin.register Talento do
         row :formacaoacads
         row :cursos
         row :certificacaos
-        row :cnh
+        row :cnhs
       end
     end
 
@@ -134,7 +134,7 @@ ActiveAdmin.register Talento do
     end
   end
 
-  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :nome_referencia, :cel_referencia, :email_referencia, :cnh, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupados_attributes: [:id, :titulo, :inicio, :termino, :descricao, :_destroy], certificacaos_attributes: [:id, :_destroy, :titulo, :area, :ano_obtencao], cursos_attributes: [:id, :_destroy, :titulo, :quando_ocorreu, :quem_ministrou, :carga_horaria, :modalidade], formacaoacads_attributes: [:id, :_destroy, :titulo, :instituicao, :nivel, :ano_formacao]
+  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :nome_referencia, :cel_referencia, :email_referencia, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name,cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupados_attributes: [:id, :titulo, :inicio, :termino, :descricao, :_destroy], certificacaos_attributes: [:id, :_destroy, :titulo, :area, :ano_obtencao], cursos_attributes: [:id, :_destroy, :titulo, :quando_ocorreu, :quem_ministrou, :carga_horaria, :modalidade], formacaoacads_attributes: [:id, :_destroy, :titulo, :instituicao, :nivel, :ano_formacao]
 
   form html: { multipart: true } do |f|
     f.inputs "Informações Pessoais" do
@@ -183,7 +183,7 @@ ActiveAdmin.register Talento do
             a.input :ano_obtencao, as: :date_time_picker, picker_options: { min_date: Date.current - 30.years, max_date: Date.current, timepicker:false}
           end
         end
-      f.input :cnh
+        f.input :cnhs
       end
     end
     f.inputs "Experiência profissional prática" do

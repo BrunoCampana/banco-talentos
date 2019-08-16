@@ -1,7 +1,7 @@
-class Formmilitar < ApplicationRecord
+class Cnh < ApplicationRecord
   def name
     titulo
   end
-  has_many :talentos
+  has_and_belongs_to_many :talentos
   validates :titulo, presence: true
 end

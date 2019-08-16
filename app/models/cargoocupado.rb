@@ -3,4 +3,5 @@ class Cargoocupado < ApplicationRecord
     titulo
   end
   belongs_to :talento
+  validates :titulo, presence: true
 end

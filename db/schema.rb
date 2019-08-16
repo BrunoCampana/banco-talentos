@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_204705) do
+ActiveRecord::Schema.define(version: 2019_08_16_161932) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -94,6 +94,19 @@ ActiveRecord::Schema.define(version: 2019_08_15_204705) do
     t.string "nome", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cnhs", force: :cascade do |t|
+    t.string "titulo", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cnhs_talentos", id: false, force: :cascade do |t|
+    t.integer "cnh_id", null: false
+    t.integer "talento_id", null: false
+    t.index ["cnh_id"], name: "index_cnhs_talentos_on_cnh_id"
+    t.index ["talento_id"], name: "index_cnhs_talentos_on_talento_id"
   end
 
   create_table "cursos", force: :cascade do |t|
@@ -200,7 +213,6 @@ ActiveRecord::Schema.define(version: 2019_08_15_204705) do
     t.string "email_referencia"
     t.integer "cpf"
     t.boolean "aval_cmt", default: false
-    t.integer "cnh", default: 0
     t.boolean "contratacao_imediata", default: false
     t.index ["cidade_id"], name: "index_talentos_on_cidade_id"
     t.index ["formmilitar_id"], name: "index_talentos_on_formmilitar_id"
