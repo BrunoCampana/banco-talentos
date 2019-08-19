@@ -1,6 +1,14 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id
-  menu :if => proc{ current_admin_user.admin? }
+  menu #:if => proc{ current_admin_user.admin? }
+
+  scope :usuarios, :default => true do |admin_users|
+    if current_admin_user.admin?
+      admin_users.all
+    else
+      admin_users.where(:quartel_id => current_admin_user.quartel_id)
+    end
+  end
 
   index do
     selectable_column
@@ -16,8 +24,8 @@ ActiveAdmin.register AdminUser do
   end
 
   filter :nome
-  filter :tipo
-  filter :status
+  filter :tipo, as: :searchable_select
+  filter :status, as: :searchable_select
   filter :quartel
   filter :email
   filter :current_sign_in_at

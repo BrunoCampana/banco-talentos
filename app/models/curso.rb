@@ -2,7 +2,6 @@ class Curso < ApplicationRecord
   def name
     titulo
   end
-  enum modalidade: ["À distância", "Presencial"]
-  belongs_to :talento
+  has_and_belongs_to_many :talentos
   validates :titulo, presence: true
 end

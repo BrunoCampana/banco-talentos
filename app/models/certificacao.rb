@@ -2,6 +2,6 @@ class Certificacao < ApplicationRecord
   def name
     titulo
   end
-  belongs_to :talento
+  has_and_belongs_to_many :talentos
   validates :titulo, presence: true
 end

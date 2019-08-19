@@ -3,7 +3,7 @@ ActiveAdmin.register Idioma do
   controller do
     def action_methods
       if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create', 'show']
+        super - ['destroy', 'new', 'create']
       else
         super
       end
@@ -25,7 +25,9 @@ ActiveAdmin.register Idioma do
     panel 'Idioma' do
       attributes_table_for idioma do
         row :lingua_nivel
-        row :talentos
+        if not current_admin_user.recrutador?
+          row :talentos
+        end
       end
     end
   end

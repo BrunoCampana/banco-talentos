@@ -3,7 +3,7 @@ ActiveAdmin.register Atributoafetivo do
   controller do
     def action_methods
       if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create', 'show']
+        super - ['destroy', 'new', 'create']
       else
         super
       end
@@ -25,7 +25,9 @@ ActiveAdmin.register Atributoafetivo do
     panel 'Atributos da área afetiva' do
       attributes_table_for habilidade do
         row :titulo
-        row :talentos
+        if not current_admin_user.recrutador?
+          row :talentos
+        end
       end
     end
   end

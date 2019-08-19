@@ -11,10 +11,10 @@ class Talento < ApplicationRecord
   enum mudar: ["Viável", "Inviável", "Talvez ", " Não sei ", " Não informado "]
 
   has_and_belongs_to_many :areaatuacaos
-  has_many :cargoocupados, :dependent => :delete_all
-  has_many :certificacaos, :dependent => :delete_all
-  has_many :cursos, :dependent => :delete_all
-  has_many :formacaoacads, :dependent => :delete_all
+  has_and_belongs_to_many :cargoocupados
+  has_and_belongs_to_many :certificacaos
+  has_and_belongs_to_many :cursos
+  has_and_belongs_to_many :formacaoacads
   belongs_to :formmilitar
   has_and_belongs_to_many :habilidades
   has_and_belongs_to_many :cnhs

@@ -48,6 +48,7 @@ ActiveAdmin.register Talento do
   filter :certificacaos, as: :searchable_select, multiple: true
   filter :atributoafetivos, as: :searchable_select, multiple: true
   filter :hierarquia, as: :searchable_select, multiple: true
+  filter :quartel, as: :searchable_select, multiple: true
   filter :bairro_cont, label: 'Bairro'
   filter :idiomas, as: :searchable_select, multiple: true
   show do |talento|
@@ -73,6 +74,7 @@ ActiveAdmin.register Talento do
       attributes_table_for talento do
         row :email
         row :celular
+        row :tel_ctt2
         row :cidade
         row :bairro
         row :endereco
@@ -134,7 +136,8 @@ ActiveAdmin.register Talento do
     end
   end
 
-  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :nome_referencia, :cel_referencia, :email_referencia, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name,cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupados_attributes: [:id, :titulo, :inicio, :termino, :descricao, :_destroy], certificacaos_attributes: [:id, :_destroy, :titulo, :area, :ano_obtencao], cursos_attributes: [:id, :_destroy, :titulo, :quando_ocorreu, :quem_ministrou, :carga_horaria, :modalidade], formacaoacads_attributes: [:id, :_destroy, :titulo, :instituicao, :nivel, :ano_formacao]
+  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :tel_ctt2, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :nome_referencia, :cel_referencia, :email_referencia, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [],
+  cargoocupado_ids: [], certificacao_ids: [], curso_id: [], formacaoacad_ids: []
 
   form html: { multipart: true } do |f|
     f.inputs "Informações Pessoais" do
@@ -152,6 +155,7 @@ ActiveAdmin.register Talento do
     f.inputs "Informações de contato" do
       f.input :email, :hint => "Ex: meuemail@algumprovedor.com"
       f.input :celular, :hint => "Apenas números, todos juntos. Ex:9299911133"
+      f.input :tel_ctt2, :hint => "Telefone alternativo para contato (de casa, de parente ou da própria OM, caso na ativa)"
       f.input :cidade, input_html: { class: "select2" }
       f.input :bairro, :hint => "Ex: Cidade Nova"
       f.input :endereco, :hint => "Não precisa pôr cidade e bairro, apenas logadouro, número e complementos. Ex: Av Coronel Teixeira, 4715"
@@ -160,44 +164,16 @@ ActiveAdmin.register Talento do
       f.input :instagram, :hint => "Caso use esta rede social, colocar o endereço de seu perfil. Ex: @brunoramoscampana"
     end
     f.inputs "Treinamento formal" do
-      f.inputs do
-        f.has_many :formacaoacads, heading: 'Formação Acadêmica', allow_destroy: true, new_record: true do |a|
-          a.input :titulo, :hint => "Exemplos: Bacharel em Direito; Ensino Médio Técnico em Eletrônica; Ensino Médio Comum; etc"
-          a.input :instituicao, :hint => "Se for faculdade, inserir apenas a sigla em maiúsculo: UFAM, UEA, UNIP, etc"
-          a.input :nivel
-          a.input :ano_formacao, as: :date_time_picker, picker_options: { min_date: Date.current - 30.years, max_date: Date.current, timepicker:false}, :hint => "Não se preocupe caso não lembrar do dia e mês de formação"
-        end
-        f.inputs do
-          f.has_many :cursos, heading: 'Cursos que possui', allow_destroy: true, new_record: true do |a|
-            a.input :titulo, :hint => "Exemplos: Manutenção de Ar Condicionados"
-            a.input :carga_horaria
-            a.input :modalidade
-            a.input :quem_ministrou, :hint => "Indique o nome da instituição que ministrou. Ex: SENAI"
-            a.input :quando_ocorreu, as: :date_time_picker, picker_options: { min_date: Date.current - 30.years, max_date: Date.current, timepicker:false}, label: "Quando curso foi ministrado"
-          end
-        end
-        f.inputs do
-          f.has_many :certificacaos, heading: 'Certificações que possui', allow_destroy: true, new_record: true do |a|
-            a.input :titulo, :hint => "Provas teóricas realizadas que comprovam conhecimento em determinada área (mais comuns na área de TI). Exemplo: Cambridge Certificate of English, Furukawa Master, PMP, etc"
-            a.input :area
-            a.input :ano_obtencao, as: :date_time_picker, picker_options: { min_date: Date.current - 30.years, max_date: Date.current, timepicker:false}
-          end
-        end
-        f.input :cnhs
-      end
+      f.input :formacaoacads, as: :searchable_select, :hint => "Selecione todas as formações acadêmicas que o militar possuir. Caso não seja encontrada a formação acadêmica do militar, cadastre uma nova"
+      f.input :cursos, :hint => "Selecione todas os cursos que o militar possuir. Caso não seja encontrada o curso do militar, cadastre uma nova"
+      f.input :certificacaos, :hint => "Certificações são exames que comprovam conhecimento em determinada área. Exemplos: Cambridge English, Oxford English, Furukawa, etc. Selecione todas as certificações que o militar possuir. Caso não seja encontrada a certificação do militar, cadastre uma nova"
+      f.input :cnhs
     end
     f.inputs "Experiência profissional prática" do
-      f.input :areaatuacaos, :hint => "Marque somente áreas de atuação em que possui experiência prática de período maior que 1 ano"
+      f.input :areaatuacaos,  :hint => "Marque somente áreas de atuação em que possui experiência prática de período maior que 1 ano"
       f.input :habilidades, :hint => "Habilidades que o militar exerceu na prática por período maior que 1 ano"
       f.input :cargos_pre_eb, :hint => "Espaço para o militar descrever as organizações onde trabalhou, de quando a quando trabalhou nas mesmas e quais cargos exerceu nestas. Não exceder o espaço da caixa de texto."
-      f.inputs do
-        f.has_many :cargoocupados, heading: 'Cargos ocupados no período de sv militar', allow_destroy: true, new_record: true do |a|
-          a.input :titulo, :hint => "Ex: Adjunto à 3ª Seção"
-          a.input :descricao, :hint => "Auxiliar o S3 no planejamento das operações do quartel, realizando as atividades de elaboração de documentos de texto, planilhas e apresentações de slide"
-          a.input :inicio
-          a.input :termino
-        end
-      end
+      f.input :cargoocupados, :hint => "Selecione todos os cargos ocupados no EB por período de pelo menos 6 meses"
       f.input :idiomas, :hint => "Marque quantas habilidades forem reais"
     end
 

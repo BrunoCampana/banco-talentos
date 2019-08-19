@@ -3,20 +3,22 @@ ActiveAdmin.register Cargoocupado do
   controller do
     def action_methods
       if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create', 'show']
+        super - ['destroy', 'new', 'create']
       else
         super
       end
     end
   end
-  config.remove_action_item(:new)
+  #config.remove_action_item(:new)
   index do
     #selectable_column
     column :titulo
     column :descricao
-    column :inicio
-    column :termino
-    actions :except => [:new]
+    if not current_admin_user.recrutador?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :titulo_cont, label: 'Título do cargo'
@@ -27,23 +29,22 @@ ActiveAdmin.register Cargoocupado do
       attributes_table_for cargoocupado do
         row :titulo
         row :descricao
-        row :inicio
-        row :termino
-        row :talento
+        if not current_admin_user.recrutador?
+          row :talentos
+        end
       end
     end
   end
 
   #belongs_to :talento
-  permit_params :titulo, :descricao, :inicio, :termino,:cargoocupado_id, :talento_id
+  permit_params :titulo, :descricao, :cargoocupado_id, talento_ids: []
 
   form do |f|
     f.inputs do
       f.input :titulo
       f.input :descricao
-      f.input :inicio, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
-      f.input :termino, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
     end
+    f.actions
   end
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

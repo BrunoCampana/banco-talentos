@@ -1,10 +1,10 @@
 ActiveAdmin.register Certificacao do
   #belongs_to :talento
-  config.remove_action_item(:new)
+  #config.remove_action_item(:new)
   controller do
     def action_methods
       if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create', 'show']
+        super - ['destroy', 'new', 'create']
       else
         super
       end
@@ -15,8 +15,11 @@ ActiveAdmin.register Certificacao do
     #selectable_column
     column :titulo
     column :area
-    column :ano_obtencao
-    actions :except => [:new]
+    if not current_admin_user.recrutador?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :titulo_cont, label: 'Título'
@@ -27,17 +30,18 @@ ActiveAdmin.register Certificacao do
       attributes_table_for certificacao do
         row :titulo
         row :area
-        row :ano_obtencao
-        row :talento
+        if not current_admin_user.recrutador?
+          row :talentos
+        end
       end
     end
   end
-  permit_params :certificacao_id, :titulo, :area, :ano_obtencao, :talento_id
+  permit_params :certificacao_id, :titulo, :area, talento_ids: []
 
   form do |f|
     f.input :titulo
     f.input :area
-    f.input :ano_obtencao, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
+    f.actions
   end
 
   # See permitted parameters documentation:

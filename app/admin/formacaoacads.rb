@@ -1,11 +1,11 @@
 ActiveAdmin.register Formacaoacad do
-  config.remove_action_item(:new)
+  #config.remove_action_item(:new)
   #belongs_to :talento
 
   controller do
     def action_methods
-      if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create', 'show']
+      if not current_admin_user.admin?
+        super - ['destroy', 'new', 'create']
       else
         super
       end
@@ -14,34 +14,30 @@ ActiveAdmin.register Formacaoacad do
   index do
     #selectable_column
     column :titulo
-    column :instituicao
-    column :nivel
-    column :ano_formacao
-    actions :except => [:new]
+    if not current_admin_user.admin?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :titulo_cont, label: 'Título'
-  filter :instituicao_cont, label: 'Instituição de ensino'
-  filter :nivel, as: :check_boxes, collection: Formacaoacad.nivels
 
   show do |formacaoacad|
     panel 'Formação Acadêmica' do
       attributes_table_for formacaoacad do
         row :titulo
-        row :instituicao
-        row :nivel
-        row :ano_formacao
-        row :talento
+        if not current_admin_user.recrutador?
+          row :talento
+        end
       end
     end
   end
-  permit_params :formacaoacad_id, :titulo, :instituicao, :nivel, :ano_formacao, :talento_id
+  permit_params :formacaoacad_id, :titulo, talento_ids: []
 
   form do |f|
     f.input :titulo
-    f.input :instituicao
-    f.input :nivel
-    f.input :ano_formacao, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
+    f.actions
   end
 
   # See permitted parameters documentation:

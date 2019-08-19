@@ -1,9 +1,9 @@
 ActiveAdmin.register Curso do
-  config.remove_action_item(:new)
+  #config.remove_action_item(:new)
   controller do
     def action_methods
       if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create', 'show']
+        super - ['destroy', 'new', 'create']
       else
         super
       end
@@ -12,11 +12,11 @@ ActiveAdmin.register Curso do
   index do
     #selectable_column
     column :titulo
-    column :quando_ocorreu
-    column :carga_horaria
-    column :modalidade
-    column :quem_ministrou
-    actions :except => [:new]
+    if not current_admin_user.recrutador?
+      actions
+    else
+      actions :except => [:new]
+    end
   end
 
   filter :titulo_cont, label: 'Título do curso'
@@ -25,23 +25,18 @@ ActiveAdmin.register Curso do
     panel 'Curso' do
       attributes_table_for curso do
         row :titulo
-        row :quando_ocorreu
-        row :carga_horaria
-        row :modalidade
-        row :quem_ministrou
-        row :talento
+        if not current_admin_user.recrutador?
+          row :talentos
+        end
       end
     end
   end
   #belongs_to :talento
-  permit_params :curso_id, :titulo, :quando_ocorreu, :quem_ministrou, :carga_horaria, :modalidade, :talento_id
+  permit_params :curso_id, :titulo, talento_ids: []
 
   form do |f|
     f.input :titulo
-    f.input :quando_ocorreu, as: :date_time_picker, datepicker_options: { min_date: "1960-01-01", max_date: "2050-01-01", timepicker:false}
-    f.input :carga_horaria
-    f.input :modalidade
-    f.input :quem_ministrou
+    f.actions
   end
 
   # See permitted parameters documentation:

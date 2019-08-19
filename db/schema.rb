@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_16_161932) do
+ActiveRecord::Schema.define(version: 2019_08_19_185432) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -72,22 +72,29 @@ ActiveRecord::Schema.define(version: 2019_08_16_161932) do
   create_table "cargoocupados", force: :cascade do |t|
     t.string "titulo", null: false
     t.text "descricao"
-    t.date "inicio"
-    t.date "termino"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "talento_id"
-    t.index ["talento_id"], name: "index_cargoocupados_on_talento_id"
+  end
+
+  create_table "cargoocupados_talentos", id: false, force: :cascade do |t|
+    t.integer "cargoocupado_id", null: false
+    t.integer "talento_id", null: false
+    t.index ["cargoocupado_id"], name: "index_cargoocupados_talentos_on_cargoocupado_id"
+    t.index ["talento_id"], name: "index_cargoocupados_talentos_on_talento_id"
   end
 
   create_table "certificacaos", force: :cascade do |t|
     t.string "titulo", null: false
     t.string "area"
-    t.date "ano_obtencao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "talento_id"
-    t.index ["talento_id"], name: "index_certificacaos_on_talento_id"
+  end
+
+  create_table "certificacaos_talentos", id: false, force: :cascade do |t|
+    t.integer "certificacao_id", null: false
+    t.integer "talento_id", null: false
+    t.index ["certificacao_id"], name: "index_certificacaos_talentos_on_certificacao_id"
+    t.index ["talento_id"], name: "index_certificacaos_talentos_on_talento_id"
   end
 
   create_table "cidades", force: :cascade do |t|
@@ -111,25 +118,28 @@ ActiveRecord::Schema.define(version: 2019_08_16_161932) do
 
   create_table "cursos", force: :cascade do |t|
     t.string "titulo", null: false
-    t.date "quando_ocorreu"
-    t.string "quem_ministrou"
-    t.integer "carga_horaria"
-    t.integer "modalidade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "talento_id"
-    t.index ["talento_id"], name: "index_cursos_on_talento_id"
+  end
+
+  create_table "cursos_talentos", id: false, force: :cascade do |t|
+    t.integer "curso_id", null: false
+    t.integer "talento_id", null: false
+    t.index ["curso_id"], name: "index_cursos_talentos_on_curso_id"
+    t.index ["talento_id"], name: "index_cursos_talentos_on_talento_id"
   end
 
   create_table "formacaoacads", force: :cascade do |t|
     t.string "titulo", null: false
-    t.string "instituicao"
-    t.integer "nivel"
-    t.date "ano_formacao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "talento_id"
-    t.index ["talento_id"], name: "index_formacaoacads_on_talento_id"
+  end
+
+  create_table "formacaoacads_talentos", id: false, force: :cascade do |t|
+    t.integer "formacaoacad_id", null: false
+    t.integer "talento_id", null: false
+    t.index ["formacaoacad_id"], name: "index_formacaoacads_talentos_on_formacaoacad_id"
+    t.index ["talento_id"], name: "index_formacaoacads_talentos_on_talento_id"
   end
 
   create_table "formmilitars", force: :cascade do |t|
@@ -214,6 +224,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_161932) do
     t.integer "cpf"
     t.boolean "aval_cmt", default: false
     t.boolean "contratacao_imediata", default: false
+    t.string "tel_ctt2"
     t.index ["cidade_id"], name: "index_talentos_on_cidade_id"
     t.index ["formmilitar_id"], name: "index_talentos_on_formmilitar_id"
     t.index ["quartel_id"], name: "index_talentos_on_quartel_id"

@@ -3,7 +3,7 @@ ActiveAdmin.register Formmilitar do
   controller do
     def action_methods
       if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create', 'show']
+        super - ['destroy', 'new', 'create']
       else
         super
       end
@@ -25,7 +25,9 @@ ActiveAdmin.register Formmilitar do
     panel 'Formação Militar' do
       attributes_table_for formmilitar do
         row :titulo
-        row :talentos
+        if not current_admin_user.recrutador?
+          row :talentos
+        end
       end
     end
   end

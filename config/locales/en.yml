@@ -92,29 +92,19 @@ en:
       cargoocupado:
         titulo: "Título do cargo"
         descricao: "Descrição do cargo"
-        inicio: "Início do período no cargo"
-        termino: "Término do período no cargo"
         talentos: "Talentos que exerceram o cargo"
       certificacao:
         titulo: "Título da certificação"
         area: "Área da certificação"
         talentos: "Talentos que possuem a certificação"
-        ano_obtencao: "Ano de obtenção"
       cidade:
         nome: "Nome"
         talentos: "Talentos residentes na cidade"
       curso:
         titulo: "Título do curso"
-        quando_ocorreu: "Período do curso"
-        quem_ministrou: "Organização que ministrou o curso"
-        carga_horaria: "Carga Horária (em hs)"
-        modalidade: "Modalidade"
         talentos: "Talento que realizou o curso"
       formacaoacad:
         titulo: "Título"
-        instituicao: "Instituição"
-        nivel: "Nível"
-        ano_formacao: "Ano de formação"
         talentos: "Talentos com essa formação"
       formmilitar:
         título: "Título"
@@ -178,3 +168,4 @@ en:
         atributoafetivos: "Qualidades observadas"
         analisado_pelo_cmt: "Perfil já aprovado pelo Cmt OM?"
         cnhs: "CNH"
+        tel_ctt2: "Telefone de contato alternativo"

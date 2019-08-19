@@ -3,7 +3,7 @@ ActiveAdmin.register Cnh do
   controller do
     def action_methods
       if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create', 'show']
+        super - ['destroy', 'new', 'create']
       else
         super
       end
@@ -25,7 +25,9 @@ ActiveAdmin.register Cnh do
     panel 'cnh' do
       attributes_table_for cnh do
         row :titulo
-        row :talentos
+        if not current_admin_user.recrutador?
+          row :talentos
+        end
       end
     end
   end

@@ -2,7 +2,7 @@ ActiveAdmin.register Cidade do
   controller do
     def action_methods
       if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create', 'show']
+        super - ['destroy', 'new', 'create']
       else
         super
       end
@@ -24,7 +24,9 @@ ActiveAdmin.register Cidade do
     panel 'Cidade' do
       attributes_table_for cidade do
         row :nome
-        row :talentos
+        if not current_admin_user.recrutador?
+          row :talentos
+        end
       end
     end
   end
