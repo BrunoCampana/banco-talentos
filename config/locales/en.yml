@@ -119,6 +119,7 @@ en:
       quartel:
         nome: "Nome"
         talentos: "Talentos desta OM"
+        tipo: "Tipo de organização"
       cnh:
         titulo: "Título"
       talento:

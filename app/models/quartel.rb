@@ -5,4 +5,5 @@ class Quartel < ApplicationRecord
   has_many :talentos
   has_many :admin_users
   validates :nome, presence: true
+  enum tipo: ["OM", "Empresa"]
 end

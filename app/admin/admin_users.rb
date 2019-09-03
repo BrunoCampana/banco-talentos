@@ -63,4 +63,7 @@ ActiveAdmin.register AdminUser do
   end
 
   #menu priority: 11
+  #after_build do |currm|
+  #  currm.admin_user = current_admin_user
+  #end
 end

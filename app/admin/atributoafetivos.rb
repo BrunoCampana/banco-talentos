@@ -23,7 +23,7 @@ ActiveAdmin.register Atributoafetivo do
 
   show do |atributoafetivo|
     panel 'Atributos da área afetiva' do
-      attributes_table_for habilidade do
+      attributes_table_for atributoafetivo do
         row :titulo
         if not current_admin_user.recrutador?
           row :talentos

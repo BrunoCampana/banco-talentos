@@ -33,7 +33,7 @@ ActiveAdmin.register Talento do
     actions
   end
 
-  filter :ndg_cont, label: "Para não usar um filtro em sua busca, apenas deixe-o em branco ou desligue-o nos checkboxes Nome de guerra"
+  filter :ndg_cont, label: "Para não usar um filtro em sua busca, apenas deixe-o em branco ou desligue-o nos checkboxes ----------------------------------- Nome de guerra"
   filter :cidade, as: :searchable_select, multiple: true
   filter :contratacao_imediata
   filter :genero, as: :searchable_select#, as: :check_boxes, collection: Talento.generos
@@ -48,7 +48,7 @@ ActiveAdmin.register Talento do
   filter :certificacaos, as: :searchable_select, multiple: true
   filter :atributoafetivos, as: :searchable_select, multiple: true
   filter :hierarquia, as: :searchable_select, multiple: true
-  filter :quartel, as: :searchable_select, multiple: true
+  #filter :quartel, as: :searchable_select, multiple: true
   filter :bairro_cont, label: 'Bairro'
   filter :idiomas, as: :searchable_select, multiple: true
   show do |talento|
@@ -145,7 +145,7 @@ ActiveAdmin.register Talento do
       f.input :nome_completo, :hint => "Por extenso, sem abreviações, apenas letras e todas maiúsculas. Ex: ALAN MATHISON TURING"
       f.input :genero
       f.input :nascimento, as: :date_time_picker, picker_options: { min_date: Date.current - 50.years, max_date: Date.current - 17.years, timepicker:false}
-      f.input :cpf, :hint => "Insira somente números, todos juntos, sem traços e pontos separadores. Ex: 11122233344"
+      f.input :cpf, :hint => "Insira somente os 11 dígitos, todos juntos, sem traços e pontos separadores. Ex: 11122233344"
       f.input :idt, :hint => "Insira com traço separador e indicando órgão expedidor. Ex: 010022343-88 / EB"
       f.input :estado_civil
       f.input :nome_pai, :hint => "Por extenso, sem abreviações, apenas letras e todas maiúsculas. Ex: ALBERT ENSTEIN"

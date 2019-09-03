@@ -3,10 +3,10 @@ ActiveAdmin.register Certificacao do
   #config.remove_action_item(:new)
   controller do
     def action_methods
-      if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create']
-      else
+      if current_admin_user.admin?
         super
+      else
+        super - ['destroy', 'new', 'create']
       end
     end
   end
@@ -15,7 +15,7 @@ ActiveAdmin.register Certificacao do
     #selectable_column
     column :titulo
     column :area
-    if not current_admin_user.recrutador?
+    if not current_admin_user.admin?
       actions
     else
       actions :except => [:new]

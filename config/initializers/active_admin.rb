@@ -4,7 +4,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Banco de Talentos do Comando Militar da Amazônia"
+  config.site_title = "Banco de Talentos da 12ª Região Militar"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.

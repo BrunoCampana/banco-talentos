@@ -71,4 +71,11 @@ class Talento < ApplicationRecord
   validates :disponibilidade, presence: true
   validates :viajar, presence: true
   validates :mudar, presence: true
+  validates :cpf, presence: true, numericality: { only_integer: true, greater_than: 9999999999, less_than: 99999999999, message: "CPF inválido"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
+  validates :atributoafetivos, length: {maximum: 3, message: "Deverão ser marcadas no máximo 3 atributos da área afetiva"}
+  #validates :quartel, presence: true, if: :mesmaom?
+
+  #def mesmaom?
+  #  self.quartel == currm.admin_user.quartel
+  #end
 end
