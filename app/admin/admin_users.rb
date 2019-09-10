@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id
+  permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id, :cpf
   menu #:if => proc{ current_admin_user.admin? }
 
   scope :usuarios, :default => true do |admin_users|
@@ -36,6 +36,7 @@ ActiveAdmin.register AdminUser do
     panel 'Gerenciar usuário' do
       attributes_table_for admin_user do
         row :nome
+        row :cpf
         row :tipo
         row :status
         row :email
@@ -54,6 +55,7 @@ ActiveAdmin.register AdminUser do
       f.input :password
       f.input :password_confirmation
       if current_admin_user.admin?
+        f.input :cpf, :hint => "Insira somente os 11 dígitos, todos juntos, sem traços e pontos separadores. Ex: 11122233344"
         f.input :tipo
         f.input :status
         f.input :quartel

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_210944) do
+ActiveRecord::Schema.define(version: 2019_09_10_171928) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_210944) do
     t.integer "status", default: 0
     t.integer "quartel_id"
     t.string "nome"
+    t.string "cpf"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["quartel_id"], name: "index_admin_users_on_quartel_id"
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
@@ -222,10 +223,10 @@ ActiveRecord::Schema.define(version: 2019_09_03_210944) do
     t.string "nome_referencia"
     t.string "cel_referencia"
     t.string "email_referencia"
-    t.integer "cpf"
     t.boolean "aval_cmt", default: false
     t.boolean "contratacao_imediata", default: false
     t.string "tel_ctt2"
+    t.string "cpf"
     t.index ["cidade_id"], name: "index_talentos_on_cidade_id"
     t.index ["formmilitar_id"], name: "index_talentos_on_formmilitar_id"
     t.index ["quartel_id"], name: "index_talentos_on_quartel_id"

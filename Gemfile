@@ -62,7 +62,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'paperclip'
-gem 'activeadmin'
+gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'cancancan'
 

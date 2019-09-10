@@ -78,6 +78,7 @@ en:
       admin_user:
         nome: "Nome do usuário"
         tipo: "Tipo de usuário"
+        cpf: "CPF"
         status: "Status"
         email: "Email"
         quartel: "Organização militar a que pertence"

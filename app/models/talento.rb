@@ -64,14 +64,15 @@ class Talento < ApplicationRecord
   validates :nome_completo, presence: true
   validates :email, presence: true
   validates :celular, presence: true
-  validates :ndg, presence: true
-  validates :genero, presence: true
-  validates :pcd, presence: true
-  validates :hierarquia, presence: true
-  validates :disponibilidade, presence: true
-  validates :viajar, presence: true
-  validates :mudar, presence: true
-  validates :cpf, presence: true, numericality: { only_integer: true, greater_than: 9999999999, less_than: 99999999999, message: "CPF inválido"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
+  #validates :ndg, presence: true
+  #validates :genero, presence: true
+  #validates :pcd, presence: true
+  #validates :hierarquia, presence: true
+  #validates :disponibilidade, presence: true
+  #validates :viajar, presence: true
+  #validates :mudar, presence: true
+  validates :cpf, presence: true, length: { is: 11, message: "CPF inválido. CPF deverá conter apenas e unicamente 11 dígitos"}, format: { with: /\A[0-9]+\z/, message: "CPF inválido. CPF deverá conter apenas os 11 dígitos"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
+  #validates :cpf, presence: true, numericality: { only_integer: true, greater_than: 9999999999, less_than: 99999999999, message: "CPF #inválido"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
   validates :atributoafetivos, length: {maximum: 3, message: "Deverão ser marcadas no máximo 3 atributos da área afetiva"}
   #validates :quartel, presence: true, if: :mesmaom?
 

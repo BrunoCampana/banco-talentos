@@ -34,4 +34,5 @@ class AdminUser < ApplicationRecord
 
   validates :email, presence: true
   validates :nome, presence: true
+  validates :cpf, presence: true, length: { is: 11, message: "CPF inválido. CPF deverá conter apenas e unicamente 11 dígitos"}, format: { with: /\A[0-9]+\z/, message: "CPF inválido. CPF deverá conter apenas os 11 dígitos"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
 end
