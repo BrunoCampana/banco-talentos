@@ -36,18 +36,18 @@ ActiveAdmin.register Talento do
   filter :ndg_cont, label: "Para não usar um filtro em sua busca, apenas deixe-o em branco ou desligue-o nos checkboxes ----------------------------------- Nome de guerra"
   filter :cidade, as: :searchable_select, multiple: true
   filter :contratacao_imediata
-  filter :genero, as: :searchable_select#, as: :check_boxes, collection: Talento.generos
-  filter :pcd, as: :searchable_select#, as: :check_boxes, collection: Talento.pcds
-  filter :disponibilidade, as: :searchable_select#, as: :check_boxes, collection: Talento.disponibilidades
-  filter :viajar, as: :searchable_select#, as: :check_boxes, collection: Talento.viajars
-  filter :mudar, as: :searchable_select#, as: :check_boxes, collection: Talento.mudars
+  filter :genero, as: :searchable_select, collection: Talento.generos #, as: :check_boxes, collection: Talento.generos
+  filter :pcd, as: :searchable_select, collection: Talento.pcds #, as: :check_boxes
+  #filter :disponibilidade, as: :searchable_select, collection: Talento.disponibilidades #, as: :check_boxes
+  filter :viajar, as: :searchable_select, collection: Talento.viajars #, as: :check_boxes
+  filter :mudar, as: :searchable_select, collection: Talento.mudars #, as: :check_boxes
   filter :cnhs, as: :searchable_select, multiple: true
   filter :habilidades, as: :searchable_select, multiple: true
   filter :formacaoacads, as: :searchable_select, multiple: true
   filter :cursos, as: :searchable_select, multiple: true
   filter :certificacaos, as: :searchable_select, multiple: true
   filter :atributoafetivos, as: :searchable_select, multiple: true
-  filter :hierarquia, as: :searchable_select, multiple: true
+  filter :hierarquia, as: :searchable_select, multiple: true, collection: Talento.hierarquia
   #filter :quartel, as: :searchable_select, multiple: true
   filter :bairro_cont, label: 'Bairro'
   filter :idiomas, as: :searchable_select, multiple: true
@@ -143,7 +143,7 @@ ActiveAdmin.register Talento do
     f.inputs "Informações Pessoais" do
       f.input :foto, :required => false, :as => :file, :hint => image_tag(f.object.foto.url(:thumb))
       f.input :nome_completo, :hint => "Por extenso, sem abreviações, apenas letras e todas maiúsculas. Ex: ALAN MATHISON TURING"
-      f.input :genero
+      f.input :genero #, as: :select, collection: Talento.genero.keys
       f.input :nascimento, as: :date_time_picker, picker_options: { min_date: Date.current - 50.years, max_date: Date.current - 17.years, timepicker:false}
       f.input :cpf, :hint => "Insira somente os 11 dígitos, todos juntos, sem traços e pontos separadores. Ex: 11122233344"
       f.input :idt, :hint => "Insira com traço separador e indicando órgão expedidor. Ex: 010022343-88 / EB"

@@ -2,13 +2,13 @@ class Talento < ApplicationRecord
   def name
     ndg
   end
-  enum genero: ["Masculino", "Feminino", "Prefiro não declarar"]
+  enum genero: ["Masculino", "Feminino", "Outros"]
   enum estado_civil: ["Solteiro", "Casado", "Separado", "Divorciado", "Viúvo", "Não informado"]
   enum pcd: [" Não ", " Sim "]
   enum hierarquia: ["Soldado do Efetivo Variável (ano do serviço militar obrigatório)", "Soldado Efetivo Profissional", "Cabo", "3º Sargento", "Aspirante-a-Oficial", "2º Tenente", "1º Tenente"]
   enum disponibilidade: ["Qualquer uma", "Integral trabalhando final de semana", "Integral sem trabalhar finais de semana", "Noturna", "Madrugada", "Não informado "]
-  enum viajar: ["Sim ", "Não ", "Talvez", "Não sei ", " Não informado"]
-  enum mudar: ["Viável", "Inviável", "Talvez ", " Não sei ", " Não informado "]
+  enum viajar: ["Sim ", "Não "]
+  enum mudar: ["Viável", "Inviável"]
 
   has_and_belongs_to_many :areaatuacaos
   has_and_belongs_to_many :cargoocupados
@@ -64,13 +64,13 @@ class Talento < ApplicationRecord
   validates :nome_completo, presence: true
   validates :email, presence: true
   validates :celular, presence: true
-  #validates :ndg, presence: true
-  #validates :genero, presence: true
-  #validates :pcd, presence: true
-  #validates :hierarquia, presence: true
-  #validates :disponibilidade, presence: true
-  #validates :viajar, presence: true
-  #validates :mudar, presence: true
+  validates :ndg, presence: true
+  validates :genero, presence: true
+  validates :pcd, presence: true
+  validates :hierarquia, presence: true
+  validates :disponibilidade, presence: true
+  validates :viajar, presence: true
+  validates :mudar, presence: true
   validates :cpf, presence: true, length: { is: 11, message: "CPF inválido. CPF deverá conter apenas e unicamente 11 dígitos"}, format: { with: /\A[0-9]+\z/, message: "CPF inválido. CPF deverá conter apenas os 11 dígitos"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
   #validates :cpf, presence: true, numericality: { only_integer: true, greater_than: 9999999999, less_than: 99999999999, message: "CPF #inválido"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
   validates :atributoafetivos, length: {maximum: 3, message: "Deverão ser marcadas no máximo 3 atributos da área afetiva"}
