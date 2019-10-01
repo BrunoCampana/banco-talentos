@@ -244,10 +244,6 @@ Cnh.create! titulo: 'C'
 Cnh.create! titulo: 'D'
 Cnh.create! titulo: 'E'
 
-Cargoocupado.create! titulo: ''
-
-Certificacao.create! titulo: ''
-
 Curso.create! titulo: 'Operador de Empilhadeira'
 Curso.create! titulo: 'Confeiteiro de Tortas Finas'
 Curso.create! titulo: 'Pizzaiolo'
