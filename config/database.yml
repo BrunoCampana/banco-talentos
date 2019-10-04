@@ -29,13 +29,13 @@ test:
   database: db/test.sqlite3
 
 production:
-#  <<: *default
-#  database: db/development.sqlite3
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: <%= ENV["DB_BANCO_TALENTOS"] %>
-  pool: 5
-  username: <%= ENV["DB_USERNAME"] %>
-  password: <%= ENV["DB_PASSWORD"] %>
-  host: localhost
+  <<: *default
+  database: db/production.sqlite3
+  #adapter: mysql2
+  #encoding: utf8
+  #reconnect: false
+  #database: <%= ENV["DB_BANCO_TALENTOS"] %>
+  #pool: 5
+  #username: <%= ENV["DB_USERNAME"] %>
+  #password: <%= ENV["DB_PASSWORD"] %>
+  #host: localhost
