@@ -17,9 +17,9 @@ class Alteracoesposentrega < ActiveRecord::Migration[5.2]
     remove_column :talentos, :parecer_cmt, :text
     remove_column :talentos, :pretensao_salario, :string
     remove_column :talentos, :area_procurada, :string
-    remove_column :talentos, :pretensao_salario, :string
+    #remove_column :talentos, :pretensao_salario, :string
     remove_column :talentos, :nivel_formacao_cargo, :integer
-    remove_column :talentos, :pretensao_salario, :string
+    #remove_column :talentos, :pretensao_salario, :string
     remove_column :talentos, :cpf, :string
 
     add_column :talentos, :bairro, :string
