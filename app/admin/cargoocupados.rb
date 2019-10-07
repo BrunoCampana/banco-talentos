@@ -59,6 +59,6 @@ ActiveAdmin.register Cargoocupado do
   #   permitted
   # end
   config.comments = false
-  menu priority: 5
-  menu parent: "Buscas específicas", label:"Buscar por cargos ocupados"
+  menu priority: 5, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por cargos ocupados", if: proc{not current_admin_user.recrutador?}
 end

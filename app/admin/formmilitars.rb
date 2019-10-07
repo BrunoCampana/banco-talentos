@@ -46,7 +46,7 @@ ActiveAdmin.register Formmilitar do
   #   permitted
   # end
   config.comments = false
-  menu priority: 12
-  menu parent: "Buscas específicas", label:"Buscar por formação militar"
+  menu priority: 12, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por formação militar", if: proc{not current_admin_user.recrutador?}
   config.sort_order = "titulo"
 end

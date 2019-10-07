@@ -46,7 +46,7 @@ ActiveAdmin.register Quartel do
   #   permitted
   # end
   config.comments = false
-  menu priority: 15
-  menu parent: "Buscas específicas", label:"Buscar por organizações militares"
+  menu priority: 15, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por organizações militares", if: proc{not current_admin_user.recrutador?}
   config.sort_order = "nome"
 end

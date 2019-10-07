@@ -46,6 +46,6 @@ ActiveAdmin.register Idioma do
   #   permitted
   # end
   config.comments = false
-  menu priority: 13
-  menu parent: "Buscas específicas", label:"Buscar por idiomas que fala"
+  menu priority: 13, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por idiomas que fala", if: proc{not current_admin_user.recrutador?}
 end

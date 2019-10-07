@@ -45,7 +45,7 @@ ActiveAdmin.register Cidade do
   #   permitted
   # end
   config.comments = false
-  menu priority: 4
-  menu parent: "Buscas específicas", label:"Buscar por cidade de residência"
+  menu priority: 4, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por cidade de residência", if: proc{not current_admin_user.recrutador?}
   config.sort_order = "nome"
 end

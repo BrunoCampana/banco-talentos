@@ -46,7 +46,7 @@ ActiveAdmin.register Habilidade do
   #   permitted
   # end
   config.comments = false
-  menu priority: 6
-  menu parent: "Buscas específicas", label:"Buscar por habilidades que possui"
+  menu priority: 6, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por habilidades que possui", if: proc{not current_admin_user.recrutador?}
   config.sort_order = "titulo"
 end

@@ -45,9 +45,14 @@ ActiveAdmin.register Areaatuacao do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
   config.comments = false
-  menu priority: 10
-  menu parent: "Buscas específicas", label:"Buscar por área de atuação"
+
+  menu priority: 10, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por área de atuação", if: proc{not current_admin_user.recrutador?}
+  
+  #menu priority: 10
+  #menu parent: "Buscas específicas", label:"Buscar por área de atuação"
 
   config.sort_order = "titulo"
 end

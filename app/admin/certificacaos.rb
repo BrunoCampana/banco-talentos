@@ -57,6 +57,6 @@ ActiveAdmin.register Certificacao do
   #   permitted
   # end
   config.comments = false
-  menu priority: 8
-  menu parent: "Buscas específicas", label:"Buscar por Certificações que possui"
+  menu priority: 8, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por Certificações que possui", if: proc{not current_admin_user.recrutador?}
 end

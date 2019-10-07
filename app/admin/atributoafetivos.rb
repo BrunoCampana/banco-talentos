@@ -34,8 +34,8 @@ ActiveAdmin.register Atributoafetivo do
   permit_params :atributoafetivo_id, :titulo, talento_ids: []
 
   config.comments = false
-  menu priority: 9
-  menu parent: "Buscas específicas", label:"Buscar por atributos afetivos"
+  menu priority: 9, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por atributos afetivos", if: proc{not current_admin_user.recrutador?}
   config.sort_order = "titulo"
 
 end

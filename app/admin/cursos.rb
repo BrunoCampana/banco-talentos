@@ -52,6 +52,6 @@ ActiveAdmin.register Curso do
   #   permitted
   # end
   config.comments = false
-  menu priority: 5
-  menu parent: "Buscas específicas", label:"Buscar por cursos que possui"
+  menu priority: 5, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por cursos que possui", if: proc{not current_admin_user.recrutador?}
 end

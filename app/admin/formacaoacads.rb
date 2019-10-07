@@ -53,6 +53,6 @@ ActiveAdmin.register Formacaoacad do
   #   permitted
   # end
   config.comments = false
-  menu priority: 7
-  menu parent: "Buscas específicas", label:"Buscar por formação acadêmica"
+  menu priority: 7, if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por formação acadêmica", if: proc{not current_admin_user.recrutador?}
 end
