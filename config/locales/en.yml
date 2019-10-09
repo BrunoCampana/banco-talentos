@@ -74,6 +74,9 @@ en:
       atributoafetivo:
         one: "Qualidades afetivas"
         other: "Qualidades afetivas"
+      recrutamento:
+        one: "Processo de Recrutamento"
+        other: "Processos de Recrutamento"
     attributes:
       admin_user:
         nome: "Nome do usuário"
@@ -82,6 +85,7 @@ en:
         status: "Status"
         email: "Email"
         quartel: "Organização militar a que pertence"
+        teleone: "Telefone de contato"
         current_sign_in_at: "Data do último acesso"
         sign_in_count: "Quantas vezes acessou a plataforma"
         created_at: "Quando foi criado"
@@ -171,3 +175,21 @@ en:
         analisado_pelo_cmt: "Perfil já aprovado pelo Cmt OM?"
         cnhs: "CNH"
         tel_ctt2: "Telefone de contato alternativo"
+        carta_recomendacao: "É recomendado pela sua OM?"
+      recrutamento:
+        nome: "Título do Processo"
+        inicio: "Início"
+        termino: "Término"
+        o_que_procura: "Cargos a serem ocupados"
+        estado: "Status do processo"
+        talentos: "Talentos selecionados no processo"
+        quartel: "Empresa realizando recrutamento"
+        admin_user: "Recrutador responsável"
+  activeadmin:
+    addons:
+      boolean:
+        models:
+          talento:
+            carta_recomendacao:
+              true_value: Perfil Recomendado pela OM
+              false_value: Sem carta de recomendação

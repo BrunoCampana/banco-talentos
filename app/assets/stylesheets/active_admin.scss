@@ -31,11 +31,13 @@ $sim-color: #08A510;
   font-size: 12px;
 
   &.true-value {
-    color: #08A510;
+    background: #08A510;
+    color: #FFFFFF;
   }
 
   &.false-value {
-    color: #FF0000;
+    background: #FF0000;
+    color: #FFFFFF;
   }
 }
 

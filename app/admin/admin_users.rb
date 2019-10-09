@@ -30,7 +30,7 @@ ActiveAdmin.register AdminUser do
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
-  filter :created_at 
+  filter :created_at
 
   show do |admin_user|
     panel 'Gerenciar usuário' do
@@ -41,6 +41,7 @@ ActiveAdmin.register AdminUser do
         row :status
         row :email
         row :quartel
+        row :teleone
         row :current_sign_in_at
         row :sign_in_count
         row :created_at
@@ -54,6 +55,7 @@ ActiveAdmin.register AdminUser do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      f.input :teleone, :hint => "Apenas números, todos juntos. Ex:9299911133"
       if current_admin_user.admin?
         f.input :cpf, :hint => "Insira somente os 11 dígitos, todos juntos, sem traços e pontos separadores. Ex: 11122233344"
         f.input :tipo

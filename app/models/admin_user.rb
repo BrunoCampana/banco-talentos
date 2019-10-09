@@ -7,6 +7,7 @@ class AdminUser < ApplicationRecord
   enum tipo: [:Admin, :CmtOM, :Cadastrador, :Recrutador]
   enum status: ["Inativo", "Ativo"]
   belongs_to :quartel
+  has_many :recrutamentos
 
   def admin?
     self.tipo == 'Admin'
@@ -35,4 +36,5 @@ class AdminUser < ApplicationRecord
   validates :email, presence: true
   validates :nome, presence: true
   validates :cpf, presence: true, length: { is: 11, message: "CPF inválido. CPF deverá conter apenas e unicamente 11 dígitos"}, format: { with: /\A[0-9]+\z/, message: "CPF inválido. CPF deverá conter apenas os 11 dígitos"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
+  validates :teleone, presence: true
 end

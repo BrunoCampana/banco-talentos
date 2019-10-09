@@ -3,7 +3,8 @@ class Quartel < ApplicationRecord
     nome
   end
   has_many :talentos
+  has_many :recrutamentos
   has_many :admin_users
   validates :nome, presence: true
-  enum tipo: ["OM", "Empresa"]
+  enum tipo: ["OM", "Empresa", "Órgão Público"]
 end

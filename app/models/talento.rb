@@ -10,6 +10,7 @@ class Talento < ApplicationRecord
   enum viajar: ["Sim ", "Não "]
   enum mudar: ["Viável", "Inviável"]
 
+  has_and_belongs_to_many :recrutamentos
   has_and_belongs_to_many :areaatuacaos
   has_and_belongs_to_many :cargoocupados
   has_and_belongs_to_many :certificacaos

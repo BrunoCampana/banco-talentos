@@ -1,5 +1,6 @@
 ActiveAdmin.register Talento do
 
+  config.sort_order = 'carta_recomendacao_desc'
   controller do
     def action_methods
       if current_admin_user.recrutador?
@@ -30,11 +31,13 @@ ActiveAdmin.register Talento do
     if current_admin_user.cmt?
       toggle_bool_column :aval_cmt, success_message: 'Perfil atualizado com sucesso!'
     end
+    bool_column :carta_recomendacao
     actions
   end
 
   filter :ndg_cont, label: "Para não usar um filtro em sua busca, apenas deixe-o em branco ou desligue-o nos checkboxes ----------------------------------- Nome de guerra"
   filter :cidade, as: :searchable_select, multiple: true
+  filter :carta_recomendacao
   filter :contratacao_imediata
   filter :genero, as: :searchable_select, collection: Talento.generos #, as: :check_boxes, collection: Talento.generos
   filter :pcd, as: :searchable_select, collection: Talento.pcds #, as: :check_boxes
@@ -48,12 +51,15 @@ ActiveAdmin.register Talento do
   filter :certificacaos, as: :searchable_select, multiple: true
   filter :atributoafetivos, as: :searchable_select, multiple: true
   filter :hierarquia, as: :searchable_select, multiple: true, collection: Talento.hierarquia
-  #filter :quartel, as: :searchable_select, multiple: true
+  #if proc{current_admin_user.admin?}
+  #  filter :quartel, as: :searchable_select, multiple: true, collection: -> {Quartel.where{|quart| quart.tipo == 0}}
+  #end
   filter :bairro_cont, label: 'Bairro'
   filter :idiomas, as: :searchable_select, multiple: true
   show do |talento|
     panel 'Informações básicas' do
       attributes_table_for talento do
+        row :carta_recomendacao
         row :foto do
           image_tag(talento.foto.url(:thumb))
         end
@@ -136,8 +142,7 @@ ActiveAdmin.register Talento do
     end
   end
 
-  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :tel_ctt2, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :nome_referencia, :cel_referencia, :email_referencia, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [],
-  cargoocupado_ids: [], certificacao_ids: [], curso_id: [], formacaoacad_ids: []
+  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :tel_ctt2, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :carta_recomendacao, :nome_referencia, :cel_referencia, :email_referencia, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupado_ids: [], certificacao_ids: [], curso_id: [], formacaoacad_ids: []
 
   form html: { multipart: true } do |f|
     f.inputs "Informações Pessoais" do
@@ -180,12 +185,15 @@ ActiveAdmin.register Talento do
     f.inputs "Carreira militar" do
       f.input :hierarquia
       f.input :ndg
-      f.input :quartel#, input_html: { class: "select2" }
+      if f.object.new_record?
+        input :quartel, collection: Quartel.where(:id => current_admin_user.quartel_id)
+      end
       f.input :formmilitar#, input_html: { class: "select2" }
       f.input :data_praca, as: :date_time_picker, picker_options: { min_date: Date.current - 10.years, max_date: Date.current, timepicker:false}
       f.input :data_desligamento, as: :date_time_picker, picker_options: { min_date: Date.current - 2.years, max_date: Date.current, timepicker:false}, :hint => "Deixe em branco se ainda está na ativa"
     end
     f.inputs "Opinião do chefe direto" do
+      f.input :carta_recomendacao, label: "Marque apenas se o sr deseja indicar o militar (como a antiga carta de recomendação)"
       f.input :atributoafetivos, label: "Marque apenas as 3 qualidades que o sr julga mais marcantes nesse militar", as: :check_boxes, :hint => "O chefe direto deverá marcar APENAS as 3 qualidades que julga mais marcantes"
       f.input :nome_referencia
       f.input :cel_referencia, :hint => "Insira apenas números. Ex: 92998111333"
