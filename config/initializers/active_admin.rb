@@ -230,10 +230,16 @@ ActiveAdmin.setup do |config|
   #
   # To change the default utility navigation to show a link to your website & a logout btn
   #
-  #   config.namespace :admin do |admin|
-  #     admin.build_menu :utility_navigation do |menu|
-  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #       admin.add_logout_button_to_menu menu
+  config.namespace :admin do |admin|
+    admin.build_menu :default do |menu|
+      menu.add label: "Fale com o desenvolvedor" do |sites|
+          sites.add label: "1) Repositório do Código Fonte", url: "https://gitlab.com/brunocampana/banco_talentos", html_options: { target: :blank }
+          sites.add label: "2) Informar e pedir ajuda com um Bug do Software", url: "https://gitlab.com/brunocampana/banco_talentos/issues", html_options: { target: :blank }
+          sites.add label: "3) Website de Bruno Campana", url:"https://brunocampana.engineer/", html_options: { target: :blank }
+          sites.add label: "4) Linkedin de Bruno Campana", url: "https://www.linkedin.com/in/engbrunocampana/", html_options: { target: :blank }
+      end
+    end
+  end
   #     end
   #   end
   #
@@ -304,7 +310,7 @@ ActiveAdmin.setup do |config|
   # By default, the footer shows the current Active Admin version. You can
   # override the content of the footer here.
   #
-  config.footer = 'Desenvolvido por Bruno Campana, www.brunocampana.engineer'
+  config.footer = 'Desenvolvido por Cap QEM Comp Bruno Campana em 2019'
 
   # == Sorting
   #

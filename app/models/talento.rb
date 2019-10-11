@@ -1,4 +1,5 @@
 class Talento < ApplicationRecord
+  before_create :confirmation_token
   def name
     ndg
   end
@@ -62,6 +63,11 @@ class Talento < ApplicationRecord
     end
   end
 
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+  end
+
   validates :nome_completo, presence: true
   validates :email, presence: true
   validates :celular, presence: true
@@ -80,4 +86,10 @@ class Talento < ApplicationRecord
   #def mesmaom?
   #  self.quartel == currm.admin_user.quartel
   #end
+  private
+  def confirmation_token
+    if self.confirm_token.blank?
+      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
+  end
 end

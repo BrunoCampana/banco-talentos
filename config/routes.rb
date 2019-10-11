@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   resources :cnhs
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  resources :talentos
+  resources :talentos do
+    member do
+      get :confirm_email
+    end
+  end  
   resources :quartels
   resources :idiomas
   resources :habilidades

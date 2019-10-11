@@ -176,6 +176,9 @@ en:
         cnhs: "CNH"
         tel_ctt2: "Telefone de contato alternativo"
         carta_recomendacao: "É recomendado pela sua OM?"
+        email_confirmed: "Concorde das políticas de privacidade"
+        confirm_token: "Token de confirmação"
+        manual_confirmed: "O militar conhece e concorda com as políticas de privacidade"
       recrutamento:
         nome: "Título do Processo"
         inicio: "Início"

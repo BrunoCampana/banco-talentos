@@ -1,6 +1,17 @@
 class TalentosController < ApplicationController
   before_action :set_talento, only: [:show, :edit, :update, :destroy]
 
+  def confirm_email
+    talento = Talento.find_by_confirm_token(params[:id])
+    if talento
+      talento.email_activate
+      flash[:success] = "Você confirmou que concorda com as Políticas de Privacidade deste Banco de Talentos. Em breve seu perfil aparecerá aos recrutadores das empresas parceiras. Boa sorte!"
+      redirect_to root_url
+    else
+      flash[:error] = "Desculpe. Perfil de Talento não encontrado. Converse com sua OM para registrar seu perfil em nosso Banco de Talentos ou para realizar a ativação manual de nossa política de privacidade junto ao administrador do sistema."
+      redirect_to root_url
+    end
+  end
   # GET /talentos
   # GET /talentos.json
   def index
@@ -27,11 +38,13 @@ class TalentosController < ApplicationController
     @talento = Talento.new(talento_params)
     respond_to do |format|
       if @talento.save
-        format.html { redirect_to @talento, notice: 'Talento was successfully created.' }
+        TalentoMailer.confirmacao_politica_privacidade(@talento).deliver
+        format.html { redirect_to @talento, notice: 'Novo Talento foi criado com sucesso!' }
         format.json { render :show, status: :created, location: @talento }
       else
-        format.html { render :new }
+        format.html { render :new}
         format.json { render json: @talento.errors, status: :unprocessable_entity }
+        #flash.now[:error] = "Há erros de preenchimento a serem corrigidos. Por favor confira os campos, siga as instruções de correção e #tente de novo."
       end
     end
   end

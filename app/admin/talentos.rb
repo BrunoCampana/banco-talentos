@@ -15,7 +15,7 @@ ActiveAdmin.register Talento do
     if current_admin_user.admin?
       talentos.all
     elsif current_admin_user.recrutador?
-      talentos.where(:aval_cmt => true)
+      talentos.where("email_confirmed = ? AND aval_cmt = ?", true, true)
     else
       talentos.where(:quartel_id => current_admin_user.quartel_id)
     end
@@ -32,6 +32,9 @@ ActiveAdmin.register Talento do
       toggle_bool_column :aval_cmt, success_message: 'Perfil atualizado com sucesso!'
     end
     bool_column :carta_recomendacao
+    if not current_admin_user.recrutador?
+      bool_column :email_confirmed
+    end
     actions
   end
 
@@ -56,6 +59,10 @@ ActiveAdmin.register Talento do
   #end
   filter :bairro_cont, label: 'Bairro'
   filter :idiomas, as: :searchable_select, multiple: true
+  if proc{current_admin_user.admin?}
+    filter :email_confirmed
+  end
+
   show do |talento|
     panel 'Informações básicas' do
       attributes_table_for talento do
@@ -138,11 +145,14 @@ ActiveAdmin.register Talento do
         row :disponibilidade
         row :viajar
         row :mudar
+        if not current_admin_user.recrutador?
+          :email_confirmed
+        end
       end
     end
   end
 
-  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :tel_ctt2, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :carta_recomendacao, :nome_referencia, :cel_referencia, :email_referencia, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupado_ids: [], certificacao_ids: [], curso_id: [], formacaoacad_ids: []
+  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :tel_ctt2, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :carta_recomendacao, :nome_referencia, :cel_referencia, :email_referencia, :email_confirmed, :confirm_token, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupado_ids: [], certificacao_ids: [], curso_id: [], formacaoacad_ids: []
 
   form html: { multipart: true } do |f|
     f.inputs "Informações Pessoais" do
@@ -208,6 +218,9 @@ ActiveAdmin.register Talento do
       f.input :disponibilidade
       f.input :viajar
       f.input :mudar
+      if f.object.persisted? and current_admin_user.admin?
+        f.input :email_confirmed, as: :boolean
+      end
     end
     f.actions
   end

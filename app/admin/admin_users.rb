@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id, :cpf
+  permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id, :cpf, :teleone
   menu #:if => proc{ current_admin_user.admin? }
 
   scope :usuarios, :default => true do |admin_users|

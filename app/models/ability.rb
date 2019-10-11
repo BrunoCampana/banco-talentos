@@ -16,7 +16,7 @@ class Ability
     elsif user.tipo == 'Recrutador'
       can :create, Recrutamento
       can :update, Recrutamento
-      can :read, Recrutamento 
+      can :read, Recrutamento
       can :update, AdminUser, :id => user.id
       can :read, :all
       can :export, :all

@@ -32,11 +32,6 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
-  config.action_mailer.perform_caching = false
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -61,6 +56,16 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.perform_caching = false
+
+  #config.action_mailer.delivery_method = :smtp
+  #host = 'localhost:3000'
+  #config.action_mailer.default_url_options = { :host => 'localhost:3000', protocol: 'http' }
+  #config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.smtp_settings = {
     address: ENV["SMTP_URL"],
     port: ENV["MAIL_PORT"],
@@ -71,5 +76,19 @@ Rails.application.configure do
     password: ENV["MAIL_PASSWORD"]
   }
 
-  config.action_mailer.default_url_options = { :host => ENV["MAILER_URL"] }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
+
+=begin
+config.action_mailer.smtp_settings = {
+  address: ENV["SMTP_URL"],
+  port: ENV["MAIL_PORT"],
+  domain: ENV["MAIL_DOMAIN"],
+  authentication: "plain",
+  enable_starttls_auto: true,
+  user_name: ENV["MAIL_USERNAME"],
+  password: ENV["MAIL_PASSWORD"]
+}
+
+config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+=end
