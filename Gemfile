@@ -88,3 +88,4 @@ gem 'activeadmin-searchable_select'
 #gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 
 gem 'therubyracer',  platforms: :ruby
+gem 'active_admin-form_errors'

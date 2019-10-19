@@ -31,6 +31,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_admin-form_errors (0.1.1)
+      activeadmin
+      railties
     active_admin_datetimepicker (0.7.2)
       activeadmin (>= 1.1, < 3.a)
       coffee-rails
@@ -322,6 +325,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_admin-form_errors
   active_admin_datetimepicker
   active_admin_filters_visibility!
   active_admin_theme
