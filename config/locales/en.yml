@@ -179,6 +179,7 @@ en:
         email_confirmed: "Concorde das políticas de privacidade"
         confirm_token: "Token de confirmação"
         manual_confirmed: "O militar conhece e concorda com as políticas de privacidade"
+        consentimento: "Arquivo contendo Política de Privacidade assinada pelo Militar"
       recrutamento:
         nome: "Título do Processo"
         inicio: "Início"

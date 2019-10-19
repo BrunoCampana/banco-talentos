@@ -148,14 +148,16 @@ ActiveAdmin.register Talento do
         if not current_admin_user.recrutador?
           :email_confirmed
         end
+        attachment_row("Arquivo de concorde do militar com compartilhamento de seus dados na plataforma", :consentimento, label: 'Download do arquivo de política de privacidade', truncate: false)
       end
     end
   end
 
-  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :tel_ctt2, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :carta_recomendacao, :nome_referencia, :cel_referencia, :email_referencia, :email_confirmed, :confirm_token, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupado_ids: [], certificacao_ids: [], curso_id: [], formacaoacad_ids: []
+  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :tel_ctt2, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :carta_recomendacao, :nome_referencia, :cel_referencia, :email_referencia, :email_confirmed, :confirm_token, :consentimento, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupado_ids: [], certificacao_ids: [], curso_id: [], formacaoacad_ids: []
 
   form html: { multipart: true } do |f|
     f.inputs "Informações Pessoais" do
+      f.input :consentimento, :required => true, as: :file, :hint => "Faça upload do arquivo (foto ou cópia digital do documento de Política de Privacidade em que o militar concorda com a inserção de seus dados pessoais na Plataforma)"      
       f.input :foto, :required => false, :as => :file, :hint => image_tag(f.object.foto.url(:thumb))
       f.input :nome_completo, :hint => "Por extenso, sem abreviações, apenas letras e todas maiúsculas. Ex: ALAN MATHISON TURING"
       f.input :genero #, as: :select, collection: Talento.genero.keys

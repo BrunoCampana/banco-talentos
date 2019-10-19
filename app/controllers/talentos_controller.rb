@@ -38,7 +38,7 @@ class TalentosController < ApplicationController
     @talento = Talento.new(talento_params)
     respond_to do |format|
       if @talento.save
-        TalentoMailer.confirmacao_politica_privacidade(@talento).deliver
+        #TalentoMailer.confirmacao_politica_privacidade(@talento).deliver
         format.html { redirect_to @talento, notice: 'Novo Talento foi criado com sucesso!' }
         format.json { render :show, status: :created, location: @talento }
       else

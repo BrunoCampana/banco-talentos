@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_10_125017) do
+ActiveRecord::Schema.define(version: 2019_10_19_014304) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -189,19 +189,8 @@ ActiveRecord::Schema.define(version: 2019_10_10_125017) do
     t.integer "estado", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "quartel_id"
-    t.bigint "admin_user_id"
     t.date "inicio"
     t.date "termino"
-    t.index ["admin_user_id"], name: "index_recrutamentos_on_admin_user_id"
-    t.index ["quartel_id"], name: "index_recrutamentos_on_quartel_id"
-  end
-
-  create_table "recrutamentos_talentos", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "recrutamento_id", null: false
-    t.bigint "talento_id", null: false
-    t.index ["recrutamento_id"], name: "index_recrutamentos_talentos_on_recrutamento_id"
-    t.index ["talento_id"], name: "index_recrutamentos_talentos_on_talento_id"
   end
 
   create_table "talentos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -250,16 +239,18 @@ ActiveRecord::Schema.define(version: 2019_10_10_125017) do
     t.string "tel_ctt2"
     t.string "cpf"
     t.boolean "carta_recomendacao", default: false
-    t.boolean "email_confirmed", default: false
     t.string "confirm_token"
+    t.string "consentimento_file_name"
+    t.string "consentimento_content_type"
+    t.bigint "consentimento_file_size"
+    t.datetime "consentimento_updated_at"
+    t.boolean "email_confirmed", default: true
     t.index ["cidade_id"], name: "index_talentos_on_cidade_id"
     t.index ["formmilitar_id"], name: "index_talentos_on_formmilitar_id"
     t.index ["quartel_id"], name: "index_talentos_on_quartel_id"
   end
 
   add_foreign_key "admin_users", "quartels"
-  add_foreign_key "recrutamentos", "admin_users"
-  add_foreign_key "recrutamentos", "quartels"
   add_foreign_key "talentos", "cidades"
   add_foreign_key "talentos", "formmilitars"
   add_foreign_key "talentos", "quartels"

@@ -28,6 +28,8 @@ class Talento < ApplicationRecord
   has_attached_file :foto, :styles => { :medium => "238x238>", :thumb => "200x200>"}
   validates_attachment_content_type :foto, content_type: /\Aimage\/.*\z/
 
+  has_attached_file :consentimento
+
   accepts_nested_attributes_for :cargoocupados, allow_destroy: true
   accepts_nested_attributes_for :certificacaos, allow_destroy: true
   accepts_nested_attributes_for :cursos, allow_destroy: true
@@ -82,6 +84,7 @@ class Talento < ApplicationRecord
   #validates :cpf, presence: true, numericality: { only_integer: true, greater_than: 9999999999, less_than: 99999999999, message: "CPF #inválido"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
   validates :atributoafetivos, length: {maximum: 3, message: "Deverão ser marcadas no máximo 3 atributos da área afetiva"}
   #validates :quartel, presence: true, if: :mesmaom?
+  validates :consentimento, presence: true
 
   #def mesmaom?
   #  self.quartel == currm.admin_user.quartel
