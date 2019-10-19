@@ -59,9 +59,9 @@ ActiveAdmin.register Talento do
   #end
   filter :bairro_cont, label: 'Bairro'
   filter :idiomas, as: :searchable_select, multiple: true
-  if proc{current_admin_user.admin?}
-    filter :email_confirmed
-  end
+  #if proc{current_admin_user.admin?}
+  #  filter :email_confirmed
+  #end
 
   show do |talento|
     panel 'Informações básicas' do
