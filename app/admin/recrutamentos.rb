@@ -1,5 +1,5 @@
 ActiveAdmin.register Recrutamento do
-#=begin
+
   controller do
     def action_methods
       if current_admin_user.admin?
@@ -11,9 +11,7 @@ ActiveAdmin.register Recrutamento do
       end
     end
   end
-#=end
-#=begin
-  #config.clear_action_items!
+
   if proc{current_admin_user.admin?}
     actions :all
   elsif proc{current_admin_user.recrutador?}
@@ -21,7 +19,7 @@ ActiveAdmin.register Recrutamento do
   else
     actions :index, :show
   end
-#=end
+
   scope :processos, :default => true do |recrutamentos|
     if not current_admin_user.recrutador?
       recrutamentos.all
@@ -43,7 +41,9 @@ ActiveAdmin.register Recrutamento do
   filter :inicio
   filter :estado, as: :searchable_select, multiple: true, collection: Recrutamento.estados
   filter :o_que_procura
-  #filter :quartel, as: :searchable_select, multiple: true
+  #if not proc{ current_admin_user.recrutador?}
+  #  filter :quartel, as: :searchable_select, multiple: true, colletion: Quartel.where(:tipo => '1')
+  #end
   filter :talentos, as: :searchable_select, multiple: true
 
   show do |recrutamento|
@@ -74,7 +74,7 @@ ActiveAdmin.register Recrutamento do
       if f.object.new_record?
         f.input :inicio, as: :date_time_picker, picker_options: { min_date: Date.current, max_date: Date.current, timepicker:false}
       end
-      f.input :talentos, :hint => "Selecione os talentos que lhe interessaram para os cargos que deseja ocupar"
+      f.input :talentos, :hint => "Selecione os talentos que lhe interessaram para os cargos que deseja ocupar", collection: Talento.where(:aval_cmt => true)
       if f.object.new_record?
         input :admin_user, collection: AdminUser.where(:id => current_admin_user.id)
       end

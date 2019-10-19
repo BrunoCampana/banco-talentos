@@ -4,6 +4,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    can :manage, Recrutamento
     if user.tipo == 'Admin'
       can :manage, :all
       can :export, :all
