@@ -32,6 +32,9 @@
 en:
   activerecord:
     models:
+      user:
+        one: "Usuário do Sistema"
+        other: "Usuários do Sistema"
       admin_user:
         one: "Usuário do Sistema"
         other: "Usuários do Sistema"

@@ -1,4 +1,4 @@
-ActiveAdmin.register AdminUser do
+ActiveAdmin.register AdminUser, as: "User" do
   permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id, :cpf, :teleone
   menu #:if => proc{ current_admin_user.admin? }
 

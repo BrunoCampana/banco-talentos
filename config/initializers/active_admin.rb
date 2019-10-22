@@ -33,7 +33,7 @@ ActiveAdmin.setup do |config|
   # config.default_namespace = false
   #
   # Default:
-  # config.default_namespace = :admin
+  config.default_namespace = :campana
   #
   # You can customize the settings for each namespace by using
   # a namespace block. For example, to change the site title
@@ -230,7 +230,7 @@ ActiveAdmin.setup do |config|
   #
   # To change the default utility navigation to show a link to your website & a logout btn
   #
-  config.namespace :admin do |admin|
+  config.namespace :campana do |admin|
     admin.build_menu :default do |menu|
       menu.add label: "Fale com o desenvolvedor" do |sites|
           sites.add label: "1) Repositório do Código Fonte", url: "https://gitlab.com/brunocampana/banco_talentos", html_options: { target: :blank }
