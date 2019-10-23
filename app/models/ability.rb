@@ -5,10 +5,10 @@ class Ability
 
   def initialize(user)
     can :manage, Recrutamento
-    if user.tipo == 'Admin'
+    if user.tipo == 'Administrador'
       can :manage, :all
       can :export, :all
-    elsif user.tipo == 'CmtOM' or 'Cadastrador'
+    elsif user.tipo == 'Comandante' or 'Cadastrador'
       can :update, AdminUser, :id => user.id
       can :create, [Cargoocupado, Certificacao, Curso, Formacaoacad, Talento]
       can [:update, :destroy], Talento, :quartel_id => user.quartel.id

@@ -4,21 +4,21 @@ class AdminUser < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
 
-  enum tipo: [:Admin, :CmtOM, :Cadastrador, :Recrutador]
+  enum tipo: [:Administrador, :Comandante, :Cadastrador, :Recrutador]
   enum status: ["Inativo", "Ativo"]
   belongs_to :quartel
   has_many :recrutamentos
 
   def admin?
-    self.tipo == 'Admin'
+    self.tipo == 'Administrador'
   end
 
   def milico?
-    self.tipo == 'Admin' or 'CmtOM' or 'Cadastrador'
+    self.tipo == 'Administrador' or 'Comandante' or 'Cadastrador'
   end
 
   def cmt?
-    self.tipo == 'CmtOM'
+    self.tipo == 'Comandante'
   end
 
   def recrutador?

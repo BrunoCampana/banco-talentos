@@ -19,10 +19,10 @@ ActiveAdmin.register Quartel do
     end
   end
 
-  filter :nome_cont, label: 'Organização Militar'
+  filter :nome_cont, label: 'Organização'
 
   show do |quartel|
-    panel 'Organização Militar' do
+    panel 'Organização' do
       attributes_table_for quartel do
         row :nome
         if not current_admin_user.recrutador?
@@ -47,6 +47,6 @@ ActiveAdmin.register Quartel do
   # end
   config.comments = false
   menu priority: 15, if: proc{not current_admin_user.recrutador?}
-  menu parent: "Buscas específicas", label:"Buscar por organizações militares", if: proc{not current_admin_user.recrutador?}
+  menu parent: "Buscas específicas", label:"Buscar por organizações", if: proc{not current_admin_user.recrutador?}
   config.sort_order = "nome"
 end

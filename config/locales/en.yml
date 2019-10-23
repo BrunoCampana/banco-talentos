@@ -87,7 +87,7 @@ en:
         cpf: "CPF"
         status: "Status"
         email: "Email"
-        quartel: "Organização militar a que pertence"
+        quartel: "Organização a que pertence"
         teleone: "Telefone de contato"
         current_sign_in_at: "Data do último acesso"
         sign_in_count: "Quantas vezes acessou a plataforma"
