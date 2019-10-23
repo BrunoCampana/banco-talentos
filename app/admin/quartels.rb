@@ -20,6 +20,7 @@ ActiveAdmin.register Quartel do
   end
 
   filter :nome_cont, label: 'Organização'
+  filter :tipo, as: :searchable_select, collection: Quartel.tipos
 
   show do |quartel|
     panel 'Organização' do
