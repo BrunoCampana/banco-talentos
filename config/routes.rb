@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :recrutamentos
   resources :cnhs
   devise_for :admin_users, ActiveAdmin::Devise.config
-  root to: "campana/dashboard#index"
+  root to: "recrutar/dashboard#index"
   ActiveAdmin.routes(self)
   resources :talentos do
     member do

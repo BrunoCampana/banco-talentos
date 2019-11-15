@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_201149) do
+ActiveRecord::Schema.define(version: 2019_11_15_212819) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -255,7 +255,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_201149) do
     t.string "consentimento_content_type"
     t.bigint "consentimento_file_size"
     t.datetime "consentimento_updated_at"
-    t.boolean "email_confirmed", default: true
+    t.boolean "email_confirmed", default: false
     t.index ["cidade_id"], name: "index_talentos_on_cidade_id"
     t.index ["formmilitar_id"], name: "index_talentos_on_formmilitar_id"
     t.index ["quartel_id"], name: "index_talentos_on_quartel_id"

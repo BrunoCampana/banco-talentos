@@ -67,8 +67,8 @@ class Talento < ApplicationRecord
   end
 
   def email_activate
-    self.email_confirmed = true
-    self.confirm_token = nil
+    self.update(email_confirmed:  "true")
+    self.update(confirm_token: nil)
   end
 
   validates :nome_completo, presence: true
@@ -85,7 +85,7 @@ class Talento < ApplicationRecord
   #validates :cpf, presence: true, numericality: { only_integer: true, greater_than: 9999999999, less_than: 99999999999, message: "CPF #inválido"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
   validates :atributoafetivos, length: {maximum: 3, message: "Deverão ser marcadas no máximo 3 atributos da área afetiva"}
   #validates :quartel, presence: true, if: :mesmaom?
-  validates :consentimento, presence: true
+  #validates :consentimento, presence: true
   validates :nome_referencia, presence: true
   validates :cel_referencia, presence: true
   validates :email_referencia, presence: true

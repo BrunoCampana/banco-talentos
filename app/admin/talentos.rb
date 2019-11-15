@@ -9,6 +9,16 @@ ActiveAdmin.register Talento do
         super
       end
     end
+    def create
+      super
+      if ((@talento.consentimento_file_name.presence == '') || (@talento.consentimento_file_name.presence == nil)) && (@talento.confirm_token != nil)
+        TalentoMailer.with(talento: @talento).confirmacao_politica_privacidade.deliver_now
+      else
+        @talento.email_activate
+        #@talento.email_confirmed = true
+        #@talento.confirm_token = nil
+      end
+    end
   end
 
   member_action :history do
@@ -159,7 +169,7 @@ ActiveAdmin.register Talento do
     end
   end
 
-  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :tel_ctt2, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :carta_recomendacao, :nome_referencia, :cel_referencia, :email_referencia, :email_confirmed, :confirm_token, :consentimento, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupado_ids: [], certificacao_ids: [], curso_id: [], formacaoacad_ids: []
+  permit_params :talento_id, :nome_completo, :genero, :nascimento, :cpf, :idt, :estado_civil, :nome_pai, :nome_mae, :pcd, :email, :celular, :utf8, :authenticity_token, :endereco, :linkedin, :facebook, :instagram, :cargos_pre_eb, :tel_ctt2, :hierarquia, :ndg, :data_praca, :data_desligamento, :disponibilidade, :viajar, :mudar, :bairro, :contratacao_imediata, :quando_disponivel, :aval_cmt, :carta_recomendacao, :nome_referencia, :cel_referencia, :email_referencia, :email_confirmed, :confirm_token, :consentimento, :cidade_id, :formmilitar_id, :quartel_id, :foto, :foto_file_name, :foto_file_size, :foto_content_type, :curriculo_file_name, cnh_ids: [], areaatuacao_ids: [], habilidade_ids: [], atributoafetivo_ids: [], idioma_ids: [], cargoocupado_ids: [], certificacao_ids: [], curso_id: [], formacaoacad_ids: []
 
   form html: { multipart: true } do |f|
     f.inputs "Informações Pessoais" do

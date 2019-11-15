@@ -2,16 +2,26 @@ class TalentosController < ApplicationController
   before_action :set_talento, only: [:show, :edit, :update, :destroy]
 
   def confirm_email
-    talento = Talento.find_by_confirm_token(params[:id])
-    if talento
-      talento.email_activate
-      flash[:success] = "Você confirmou que concorda com as Políticas de Privacidade deste Banco de Talentos. Em breve seu perfil aparecerá aos recrutadores das empresas parceiras. Boa sorte!"
-      redirect_to root_url
+
+    @talento = Talento.find_by_confirm_token(params[:id])
+    #puts @talento.nome_completo
+    if @talento.present?
+      render "confirmacao/confirm"
+      @talento.email_activate
+      #@talento.email_confirmed = true
+      #@talento.confirm_token = nil
+      #flash[:success] = "Você confirmou que concorda com as Políticas de Privacidade deste Banco de Talentos. Em breve seu perfil aparecerá aos recrutadores das empresas parceiras. Boa sorte!"
+      #puts("<==================== confirmed     ==========================>")
+      #redirect_to root_url
+
     else
-      flash[:error] = "Desculpe. Perfil de Talento não encontrado. Converse com sua OM para registrar seu perfil em nosso Banco de Talentos ou para realizar a ativação manual de nossa política de privacidade junto ao administrador do sistema."
-      redirect_to root_url
+      #flash[:error] = "Desculpe. Perfil de Talento não encontrado. Converse com sua OM para registrar seu perfil em nosso Banco de Talentos ou para realizar a ativação manual de nossa política de privacidade junto ao administrador do sistema."
+      #puts("<====================== error       ==========================>")
+      #redirect_to root_url
+      render "confirmacao/unconfirm"
     end
   end
+
   # GET /talentos
   # GET /talentos.json
   def index
