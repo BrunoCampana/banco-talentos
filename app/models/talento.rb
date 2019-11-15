@@ -1,4 +1,5 @@
 class Talento < ApplicationRecord
+  has_paper_trail
   before_create :confirmation_token
   def name
     ndg
@@ -85,6 +86,9 @@ class Talento < ApplicationRecord
   validates :atributoafetivos, length: {maximum: 3, message: "Deverão ser marcadas no máximo 3 atributos da área afetiva"}
   #validates :quartel, presence: true, if: :mesmaom?
   validates :consentimento, presence: true
+  validates :nome_referencia, presence: true
+  validates :cel_referencia, presence: true
+  validates :email_referencia, presence: true
 
   #def mesmaom?
   #  self.quartel == currm.admin_user.quartel

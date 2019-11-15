@@ -1,0 +1,149 @@
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+
+<style type="text/css">
+
+    .grid {
+    	display: grid;
+    }
+
+    /* 100px é o valor total, ignora conteúdo, margem e etc. Respeita apenas o min-width do item.*/
+    .grid-template-columns-1 {
+    	grid-template-columns: 500px 350px 350px;
+    }
+
+    .avisos{
+      margin-right: 20px;
+      height: 100px;
+    }
+
+    .numero{
+      font-size: 100px;
+      text-align: center;
+      vertical-align: middle;
+      margin-right: 20px;
+    }
+
+    .altura{
+      max-height: 250px;
+    }
+
+    .negrito{
+      font-weight: bold;
+    }
+
+    .embaixo{
+      margin-top: 20px;
+    }
+
+    .cabeca{
+      background-color: #f7f7f7;
+      border-radius: 10px 10px 0px 0px ;
+      border: solid 1px #dfdfdf;
+      text-align: center;
+      font-size: 20px;
+
+    }
+
+    .corpo{
+      background-color: white;
+      border: solid 1px #dfdfdf;
+      border-radius: 0px 0px 10px 10px ;
+      text-align: center;
+      font-size: 15px;
+      overflow: auto;
+      height: 200px
+    }
+
+    .numerocorpo{
+      font-size: 100px;
+      vertical-align: middle;
+      background-color: white;
+      border: solid 1px #dfdfdf;
+      border-radius: 0px 0px 10px 10px ;
+      text-align: center;
+      /* font-size: 15px; */
+      /* overflow: auto; */
+      height: 200px
+    }
+
+</style>
+
+
+<!-- <h1 style = "color:blue;"> <%=ENV["AVISO_OM"] %> </h1> -->
+
+<!-- <h1 style = "color:blue;"> <%=ENV["AVISO_RECRUTADOR"] %> </h1> -->
+
+<!-- <h1 style = "color:blue;"> <%=ENV["AVISO_CONT"] %> </h1> -->
+
+<!-- <h1 style = "color:blue;"> <%="Existem " + Quartel.where(tipo: "Empresa").count().to_s + " empresas cadastradas \n" %> </h1> -->
+
+<!-- <h1 style = "color:blue;"> <%="Existem " + AdminUser.where(tipo: "Recrutador").count().to_s + " recrutadores cadastrados \n"%> </h1> -->
+
+<!-- <h1 style = "color:blue;"> <%="Existem " + Talento.count().to_s + " talentos cadastrados \n" %> </h1> -->
+
+<section class="grid grid-template-columns-1">
+  <div class="avisos">
+    <div class="cabeca negrito">
+      Avisos para Organizações Militares
+    </div>
+    <div class="corpo ">
+      <p class=""><%=ENV["AVISO_OM"] %></p>
+    </div>
+  </div>
+  <div class="numero">
+    <div class="cabeca negrito">
+      Profissionais cadastrados
+    </div>
+    <div class="numerocorpo">
+      <p class=""><%=Talento.count().to_s %></p>
+    </div>
+  </div>
+  <div class="numero">
+    <div class="cabeca negrito">
+      Contratações pelo sistema
+    </div>
+    <div class="numerocorpo">
+      <p class=""><%=ENV["AVISO_CONT"] %></p>
+    </div>
+  </div>
+</section>
+
+<section class="grid grid-template-columns-1" style="margin-top: 10px">
+  <div class="avisos">
+    <div class="cabeca negrito">
+      Avisos para Recrutadores
+    </div>
+    <div class="corpo ">
+      <p class=""><%=ENV["AVISO_RECRUTADOR"] %></p>
+    </div>
+  </div>
+  <div class="numero">
+    <div class="cabeca negrito">
+      Empresas Cadastradas
+    </div>
+    <div class="numerocorpo">
+      <p class=""><%=Quartel.where(tipo: "Empresa").count().to_s%></p>
+    </div>
+  </div>
+  <div class="numero">
+    <div class="cabeca negrito">
+      Organizações Militares
+    </div>
+    <div class="numerocorpo">
+      <p class=""><%=Quartel.where(tipo: "OM").count().to_s%></p>
+    </div>
+  </div>
+</section>
+<!-- <div class="alert alert-primary" role="alert">
+  A simple primary alert—check it out!
+</div> -->
+
+<!-- <div class="card">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+  </div>
+</div> -->

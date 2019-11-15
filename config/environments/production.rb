@@ -100,7 +100,7 @@ Rails.application.configure do
     password: ENV["MAIL_PASSWORD"]
   }
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'talentos.eb.mil.br' }
   #config.action_mailer.perform_deliveries = true
 
   # Do not dump schema after migrations.

@@ -11,6 +11,12 @@ ActiveAdmin.register Talento do
     end
   end
 
+  member_action :history do
+    @talento = Talento.find(params[:id])
+    @versions = PaperTrail::Version.where(item_type: 'Talento', item_id: @talento.id)
+    render "layouts/history"
+  end
+
   scope :perfis, :default => true do |talentos|
     if current_admin_user.admin?
       talentos.all
@@ -42,11 +48,11 @@ ActiveAdmin.register Talento do
   filter :cidade, as: :searchable_select, multiple: true
   filter :carta_recomendacao
   filter :contratacao_imediata
-  filter :genero, as: :searchable_select, collection: Talento.generos #, as: :check_boxes, collection: Talento.generos
-  filter :pcd, as: :searchable_select, collection: Talento.pcds #, as: :check_boxes
+  filter :genero, as: :searchable_select, multiple:true, collection: Talento.generos #, as: :check_boxes, collection: Talento.generos
+  filter :pcd, as: :searchable_select, multiple:true, collection: Talento.pcds #, as: :check_boxes
   #filter :disponibilidade, as: :searchable_select, collection: Talento.disponibilidades #, as: :check_boxes
-  filter :viajar, as: :searchable_select, collection: Talento.viajars #, as: :check_boxes
-  filter :mudar, as: :searchable_select, collection: Talento.mudars #, as: :check_boxes
+  filter :viajar, as: :searchable_select, multiple:true, collection: Talento.viajars #, as: :check_boxes
+  filter :mudar, as: :searchable_select, multiple:true, collection: Talento.mudars #, as: :check_boxes
   filter :cnhs, as: :searchable_select, multiple: true
   filter :habilidades, as: :searchable_select, multiple: true
   filter :formacaoacads, as: :searchable_select, multiple: true
@@ -196,7 +202,7 @@ ActiveAdmin.register Talento do
 
     f.inputs "Carreira militar" do
       f.input :hierarquia
-      f.input :ndg
+      f.input :ndg, :hint => "Letras maiúsculas. Ex:NEWTON"
       if f.object.new_record?
         input :quartel, collection: Quartel.where(:id => current_admin_user.quartel_id)
       end
@@ -255,3 +261,9 @@ end
 #      scoped_collection.where(ndg: 'Valentim').first!
 #    end
 #end
+
+=begin
+action_item :history, only: :index do
+  link_to "audit", "/app/admin/talentos/#{self.id}/history"
+end
+=end

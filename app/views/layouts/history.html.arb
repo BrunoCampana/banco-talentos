@@ -1,0 +1,14 @@
+panel "History" do
+  table_for assigns[:versions] do
+    # column ("Item") do |v|
+    #   if v.item
+    #     link_to v.item.id, [:admin, v.item]
+    #   end
+    # end
+    column ("Nome do perfil modificado") { |v| v.item }
+    column ("Data da modificação") { |v| v.created_at.to_s :long }
+    #column ("Modified by") { |v| v.whodunnit.to_s }
+    column ("Modificado por") { |v| AdminUser.find(v.whodunnit).nome }
+    column ("Última versão antes da modificação") {|v| v.object.to_s}
+  end
+end
