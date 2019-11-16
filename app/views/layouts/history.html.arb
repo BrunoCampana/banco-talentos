@@ -7,8 +7,14 @@ panel "History" do
     # end
     column ("Nome do perfil modificado") { |v| v.item }
     column ("Data da modificação") { |v| v.created_at.to_s :long }
-    #column ("Modified by") { |v| v.whodunnit.to_s }
-    column ("Modificado por") { |v| AdminUser.find(v.whodunnit).nome }
+    #column ("Modificado por") { |v| v.whodunnit.to_s }
+    column ("Modificado por") do |v|
+      if (v.whodunnit != nil)
+        AdminUser.find(v.whodunnit).nome
+      else
+        "Próprio dono do perfil"
+      end
+    end
     column ("Última versão antes da modificação") {|v| v.object.to_s}
   end
 end

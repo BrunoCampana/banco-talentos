@@ -4,7 +4,7 @@ ActiveAdmin.register Talento do
   controller do
     def action_methods
       if current_admin_user.recrutador?
-        super - ['destroy', 'new', 'create']
+        super - ['destroy', 'new', 'create', 'history']
       else
         super
       end
@@ -51,7 +51,12 @@ ActiveAdmin.register Talento do
     if not current_admin_user.recrutador?
       bool_column :email_confirmed
     end
-    actions
+    #actions
+    actions defaults: true do |el|
+      if not current_admin_user.recrutador?
+        link_to 'History', 'talentos/'+el.id.to_s+'/history'
+      end
+    end
   end
 
   filter :ndg_cont, label: "Para não usar um filtro em sua busca, apenas deixe-o em branco ou desligue-o nos checkboxes ----------------------------------- Nome de guerra"
@@ -212,7 +217,7 @@ ActiveAdmin.register Talento do
 
     f.inputs "Carreira militar" do
       f.input :hierarquia
-      f.input :ndg, :hint => "Letras maiúsculas. Ex:NEWTON"
+      f.input :ndg, :hint => "Letras maiúsculas. Ex: NEWTON"
       if f.object.new_record?
         input :quartel, collection: Quartel.where(:id => current_admin_user.quartel_id)
       end

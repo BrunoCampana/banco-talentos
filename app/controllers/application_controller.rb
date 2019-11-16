@@ -1,8 +1,12 @@
 class ApplicationController < ActionController::Base
-  before_action :set_paper_trail_whodunnit
+  before_action :set_paper_trail_whodunnit, only: [:update, :destroy]
 
   def user_for_paper_trail
-    admin_user_signed_in? ? current_admin_user.try(:id) : 'Próprio dono do perfil'
+  #  if admin_user_signed_in?
+      current_admin_user.try(:id)
+  #  else
+  #    'Próprio dono do perfil'
+  #  end
   end
 
   protect_from_forgery
