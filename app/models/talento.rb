@@ -4,7 +4,7 @@ class Talento < ApplicationRecord
   def name
     ndg
   end
-  enum genero: ["Masculino", "Feminino", "Outros"]
+  enum genero: ["Masculino", "Feminino"]
   enum estado_civil: ["Solteiro", "Casado", "Separado", "Divorciado", "Viúvo", "Não informado"]
   enum pcd: [" Não ", " Sim "]
   enum hierarquia: ["Soldado do Efetivo Variável (ano do serviço militar obrigatório)", "Soldado Efetivo Profissional", "Cabo", "3º Sargento", "Aspirante-a-Oficial", "2º Tenente", "1º Tenente"]
