@@ -2,7 +2,7 @@ Olá <%= @talento.nome_completo %>,
 
 Este é um email automático gerado pelo nosso Banco de Talentos. Abaixo segue nossa política de privacidade. Caso você concorde com ela e deseja disponibilizar seu perfil para que empresas possam recrutá-lo, clique no link abaixo:
 
-<%= link_to 'Autorizo que meus dados sejam compartilhados com empresas interessadas em me contratar',"http://"+ENV["MAILER_URL"].to_s+"/talentos/"+(@talento.confirm_token).to_s+"/confirm_email" %>
+<%= "http://"+ENV["MAILER_URL"].to_s+"/talentos/"+(@talento.confirm_token).to_s+"/confirm_email" %>    
 
 PROGRAMA DE TALENTOS
 
