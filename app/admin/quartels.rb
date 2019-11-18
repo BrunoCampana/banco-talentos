@@ -28,11 +28,12 @@ ActiveAdmin.register Quartel do
         row :nome
         if not current_admin_user.recrutador?
           row :talentos
+          row :tipo
         end
       end
     end
   end
-  permit_params :quartel_id, :nome, :talentos
+  permit_params :quartel_id, :nome, :talentos, :tipo
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
