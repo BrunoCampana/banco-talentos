@@ -88,15 +88,23 @@ ActiveAdmin.register Talento do
     panel 'Informações básicas' do
       attributes_table_for talento do
         row :carta_recomendacao
-        row :foto do
-          image_tag(talento.foto.url(:thumb))
+        if current_admin_user.recrutador?
+          row :hierarquia
+          row :ndg
         end
-        row :nome_completo
+        if not current_admin_user.recrutador?
+          row :foto do
+            image_tag(talento.foto.url(:thumb))
+          end
+          row :nome_completo
+        end
         row :nascimento
         row :idade
         row :genero
-        row :cpf
-        row :idt
+        if not current_admin_user.recrutador?
+          row :cpf
+          row :idt
+        end
         row :estado_civil
         row :nome_pai
         row :nome_mae

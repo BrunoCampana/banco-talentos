@@ -45,6 +45,7 @@ ActiveAdmin.register AdminUser, as: "User" do
         row :current_sign_in_at
         row :sign_in_count
         row :created_at
+        row :updated_at
       end
     end
   end

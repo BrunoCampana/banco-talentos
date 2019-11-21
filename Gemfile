@@ -91,3 +91,5 @@ gem 'therubyracer',  platforms: :ruby
 gem 'active_admin-form_errors'
 
 gem 'paper_trail'
+
+gem 'whenever', require: false

@@ -92,6 +92,7 @@ en:
         current_sign_in_at: "Data do último acesso"
         sign_in_count: "Quantas vezes acessou a plataforma"
         created_at: "Quando foi criado"
+        updated_at: "Última atualização"
       areaatuacao:
         titulo: "Título"
         talentos: "Talentos que trabalharam na área"
