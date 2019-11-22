@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser, as: "User" do
-  permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id, :cpf, :teleone, :created_at, :updated_at
+  permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id, :cpf, :teleone, :created_at, :updated_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :failed_attempts, :unlock_token, :locked_at
   menu #:if => proc{ current_admin_user.admin? }
 
   scope :usuarios, :default => true do |admin_users|
@@ -22,8 +22,10 @@ ActiveAdmin.register AdminUser, as: "User" do
     end
     column :email
     column :quartel
-    column :current_sign_in_at
-    column :sign_in_count
+    if current_admin_user.admin?
+      column :last_sign_in_at
+      column :sign_in_count
+    end
     actions
   end
 
@@ -46,10 +48,17 @@ ActiveAdmin.register AdminUser, as: "User" do
         row :email
         row :quartel
         row :teleone
-        row :current_sign_in_at
-        row :sign_in_count
-        row :created_at
-        row :updated_at
+        if current_admin_user.admin?
+          row :created_at
+          row :updated_at
+          row :sign_in_count
+          row :last_sign_in_at
+          row :last_sign_in_ip
+          row :failed_attempts
+          row :locked_at
+          row :current_sign_in_at
+          row :current_sign_in_ip
+        end
       end
     end
   end
@@ -64,7 +73,7 @@ ActiveAdmin.register AdminUser, as: "User" do
       if current_admin_user.admin?
         f.input :cpf, :hint => "Insira somente os 11 dígitos, todos juntos, sem traços e pontos separadores. Ex: 11122233344"
         f.input :tipo
-        f.input :status
+        f.input :status, :label => "Ativar usuário?"
         f.input :quartel
       end
     end

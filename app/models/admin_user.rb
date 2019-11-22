@@ -2,10 +2,9 @@ class AdminUser < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :trackable, :lockable
 
   enum tipo: [:Administrador, :Comandante, :Cadastrador, :Recrutador]
-  enum status: ["Inativo", "Ativo"]
   belongs_to :quartel
   has_many :recrutamentos
 
@@ -26,7 +25,7 @@ class AdminUser < ApplicationRecord
   end
 
   def active_for_authentication?
-    super && status == "Ativo"
+    super && status == true
   end
 
   def name

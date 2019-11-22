@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_212819) do
+ActiveRecord::Schema.define(version: 2019_11_22_212247) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -35,14 +35,23 @@ ActiveRecord::Schema.define(version: 2019_11_15_212819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tipo", default: 2
-    t.integer "status", default: 0
+    t.boolean "status", default: false
     t.bigint "quartel_id"
     t.string "nome"
     t.string "cpf"
     t.string "teleone"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "last_sign_in_at"
+    t.string "last_sign_in_ip"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "current_sign_in_at"
+    t.string "current_sign_in_ip"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["quartel_id"], name: "index_admin_users_on_quartel_id"
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_admin_users_on_unlock_token", unique: true
   end
 
   create_table "areaatuacaos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
