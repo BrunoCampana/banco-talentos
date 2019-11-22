@@ -1,5 +1,5 @@
 ActiveAdmin.register AdminUser, as: "User" do
-  permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id, :cpf, :teleone
+  permit_params :email, :password, :password_confirmation, :nome, :tipo, :status, :quartel_id, :cpf, :teleone, :created_at, :updated_at
   menu #:if => proc{ current_admin_user.admin? }
 
   scope :usuarios, :default => true do |admin_users|
@@ -11,11 +11,15 @@ ActiveAdmin.register AdminUser, as: "User" do
   end
 
   index do
-    selectable_column
+    if current_admin_user.admin?
+      selectable_column
+    end
     id_column
     column :nome
     column :tipo
-    column :status
+    if current_admin_user.admin?
+      toggle_bool_column :status, success_message: 'Perfil atualizado com sucesso!'
+    end
     column :email
     column :quartel
     column :current_sign_in_at

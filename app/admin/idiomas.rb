@@ -10,7 +10,9 @@ ActiveAdmin.register Idioma do
     end
   end
   index do
-    #selectable_column
+    if current_admin_user.admin?
+      selectable_column
+    end
     column :lingua_nivel
     if current_admin_user.admin?
       actions

@@ -12,7 +12,9 @@ ActiveAdmin.register Certificacao do
   end
 
   index do
-    #selectable_column
+    if current_admin_user.admin?
+      selectable_column
+    end
     column :titulo
     column :area
     if not current_admin_user.admin?

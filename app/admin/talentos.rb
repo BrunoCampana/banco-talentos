@@ -38,7 +38,9 @@ ActiveAdmin.register Talento do
   end
 
   index do
-    #selectable_column
+    if current_admin_user.admin?
+      selectable_column
+    end
     column :hierarquia
     column :ndg
     toggle_bool_column :contratacao_imediata, success_message: 'Perfil atualizado com sucesso!'
@@ -54,7 +56,7 @@ ActiveAdmin.register Talento do
     #actions
     actions defaults: true do |el|
       if not current_admin_user.recrutador?
-        link_to 'History', 'talentos/'+el.id.to_s+'/history'
+        link_to 'Auditar', 'talentos/'+el.id.to_s+'/history'
       end
     end
   end

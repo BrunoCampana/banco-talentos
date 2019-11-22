@@ -10,7 +10,9 @@ ActiveAdmin.register Curso do
     end
   end
   index do
-    #selectable_column
+    if current_admin_user.admin?
+      selectable_column
+    end
     column :titulo
     if not current_admin_user.admin?
       actions

@@ -11,7 +11,9 @@ ActiveAdmin.register Cargoocupado do
   end
   #config.remove_action_item(:new)
   index do
-    #selectable_column
+    if current_admin_user.admin?
+      selectable_column
+    end
     column :titulo
     column :descricao
     if not current_admin_user.admin?

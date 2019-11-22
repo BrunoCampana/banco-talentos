@@ -11,7 +11,9 @@ ActiveAdmin.register Areaatuacao do
     end
   end
   index do
-    #selectable_column
+    if current_admin_user.admin?
+      selectable_column
+    end
     column :titulo
     if current_admin_user.admin?
       actions
@@ -50,7 +52,7 @@ ActiveAdmin.register Areaatuacao do
 
   menu priority: 10, if: proc{not current_admin_user.recrutador?}
   menu parent: "Buscas específicas", label:"Buscar por área de atuação", if: proc{not current_admin_user.recrutador?}
-  
+
   #menu priority: 10
   #menu parent: "Buscas específicas", label:"Buscar por área de atuação"
 

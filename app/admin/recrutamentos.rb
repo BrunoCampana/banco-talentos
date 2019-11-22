@@ -29,6 +29,9 @@ ActiveAdmin.register Recrutamento do
   end
 
   index do
+    if current_admin_user.admin?
+      selectable_column
+    end
     column :quartel
     column :nome
     column :inicio

@@ -10,7 +10,9 @@ ActiveAdmin.register Cnh do
     end
   end
   index do
-    #selectable_column
+    if current_admin_user.admin?
+      selectable_column
+    end
     column :titulo
     if current_admin_user.admin?
       actions
