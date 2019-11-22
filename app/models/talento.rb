@@ -90,14 +90,6 @@ class Talento < ApplicationRecord
   validates :cel_referencia, presence: true
   validates :email_referencia, presence: true
 
-  #def mesmaom?
-  #  self.quartel == currm.admin_user.quartel
-  #end
-
-  #def self.desativar
-  #  self.update_all(pcd: 1)
-  #end
-
   private
   def confirmation_token
     if self.confirm_token.blank?

@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.month do
-  runner "AdminUser.desativar"
+every :day do
+  runner "AdminUser.where(tipo: 3).where(status: 1).where('updated_at < ?', 1.year.ago).update_all(status: 0)"
 end

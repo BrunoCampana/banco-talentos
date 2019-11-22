@@ -33,11 +33,6 @@ class AdminUser < ApplicationRecord
     nome
   end
 
-  def self.desativar
-    desativar_recrutadores_antigos = AdminUser.where(tipo: 3).where(status: 1).where('updated_at > ?', 1.minute.ago)
-    desativar_recrutadores_antigos.update_all(status: 0)
-  end
-
   validates :email, presence: true
   validates :nome, presence: true
   validates :cpf, presence: true, length: { is: 11, message: "CPF inválido. CPF deverá conter apenas e unicamente 11 dígitos"}, format: { with: /\A[0-9]+\z/, message: "CPF inválido. CPF deverá conter apenas os 11 dígitos"}, uniqueness: {message: "CPF já encontra-se cadastrado em nossa base de dados"}
