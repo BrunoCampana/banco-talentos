@@ -28,6 +28,7 @@ ActiveAdmin.register Cidade do
         row :nome
         if not current_admin_user.recrutador?
           row :talentos
+          row :quantos_perfis_na_cidade?
         end
       end
     end

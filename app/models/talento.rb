@@ -42,10 +42,16 @@ class Talento < ApplicationRecord
 
   def idade
     if self.nascimento != nil
-      if ((Time.now.month>=self.nascimento.month)and(Time.now.day>=self.nascimento.day))
-        idade = (Time.now.year - self.nascimento.year).to_s + ' anos'
-      else
+      if (Time.now.month<self.nascimento.month)
         idade = ((Time.now.year - self.nascimento.year).to_i - 1).to_s + ' anos'
+      elsif (Time.now.month>self.nascimento.month)
+        idade = (Time.now.year - self.nascimento.year).to_s + ' anos'
+      else 
+        if (Time.now.day>=self.nascimento.day)
+          idade = (Time.now.year - self.nascimento.year).to_s + ' anos'
+        else
+          idade = ((Time.now.year - self.nascimento.year).to_i - 1).to_s + ' anos'
+        end
       end
     end
   end

@@ -114,6 +114,7 @@ en:
       cidade:
         nome: "Nome"
         talentos: "Talentos residentes na cidade"
+        quantos_perfis_na_cidade: "Quantidade de perfis cadastrados da cidade"
       curso:
         titulo: "Título do curso"
         talentos: "Talento que realizou o curso"
@@ -127,6 +128,7 @@ en:
         titulo: "Título"
         area: "Área de conhecimento"
         talentos: "Talentos com essa habilidade"
+        quantos_possuem?: 'Quantidade de perfis que possuem esta habilidade'
       idioma:
         lingua_nivel: "Proficiência linguística"
         talentos: "Talentos com proficiência"
@@ -134,6 +136,7 @@ en:
         nome: "Nome"
         talentos: "Talentos desta OM"
         tipo: "Tipo de organização"
+        quantos_perfis_da_om?: "Quantidade de perfis cadastrados da OM"
       cnh:
         titulo: "Título"
       talento:
@@ -358,6 +361,7 @@ en:
     - Sex
     - Sáb
     abbr_month_names:
+    -
     - Jan
     - Fev
     - Mar
@@ -383,6 +387,7 @@ en:
       long: "%d de %B de %Y"
       short: "%d de %B"
     month_names:
+    -
     - Janeiro
     - Fevereiro
     - Março

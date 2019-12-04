@@ -29,6 +29,7 @@ ActiveAdmin.register Habilidade do
         row :titulo
         if not current_admin_user.recrutador?
           row :talentos
+          row :quantos_possuem?
         end
       end
     end

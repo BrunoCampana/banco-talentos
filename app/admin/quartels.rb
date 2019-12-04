@@ -30,6 +30,7 @@ ActiveAdmin.register Quartel do
         row :nome
         if not current_admin_user.recrutador?
           row :talentos
+          row :quantos_perfis_da_om?
           row :tipo
         end
       end

@@ -4,4 +4,8 @@ class Cidade < ApplicationRecord
   end
   has_many :talentos
   validates :nome, presence: true
+
+  def quantos_perfis_na_cidade?
+    talentos.count
+  end
 end
