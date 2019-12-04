@@ -10,6 +10,8 @@ ActiveAdmin.register Areaatuacao do
       end
     end
   end
+
+  config.sort_order = 'titulo_asc'
   index do
     if current_admin_user.admin?
       selectable_column
@@ -55,6 +57,4 @@ ActiveAdmin.register Areaatuacao do
 
   #menu priority: 10
   #menu parent: "Buscas específicas", label:"Buscar por área de atuação"
-
-  config.sort_order = "titulo"
 end

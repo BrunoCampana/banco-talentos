@@ -9,6 +9,8 @@ ActiveAdmin.register Formmilitar do
       end
     end
   end
+
+  config.sort_order = 'titulo_asc'
   index do
     if current_admin_user.admin?
       selectable_column
@@ -50,5 +52,4 @@ ActiveAdmin.register Formmilitar do
   config.comments = false
   menu priority: 12, if: proc{not current_admin_user.recrutador?}
   menu parent: "Buscas específicas", label:"Buscar por formação militar", if: proc{not current_admin_user.recrutador?}
-  config.sort_order = "titulo"
 end

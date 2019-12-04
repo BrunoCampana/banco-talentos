@@ -9,6 +9,8 @@ ActiveAdmin.register Atributoafetivo do
       end
     end
   end
+
+  config.sort_order = 'titulo_asc'
   index do
     if current_admin_user.admin?
       selectable_column
@@ -38,6 +40,4 @@ ActiveAdmin.register Atributoafetivo do
   config.comments = false
   menu priority: 9, if: proc{not current_admin_user.recrutador?}
   menu parent: "Buscas específicas", label:"Buscar por atributos afetivos", if: proc{not current_admin_user.recrutador?}
-  config.sort_order = "titulo"
-
 end

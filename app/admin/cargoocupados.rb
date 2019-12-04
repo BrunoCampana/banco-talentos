@@ -10,6 +10,7 @@ ActiveAdmin.register Cargoocupado do
     end
   end
   #config.remove_action_item(:new)
+  config.sort_order = 'titulo_asc'
   index do
     if current_admin_user.admin?
       selectable_column

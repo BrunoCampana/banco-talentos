@@ -9,6 +9,8 @@ ActiveAdmin.register Quartel do
       end
     end
   end
+
+  config.sort_order = 'nome_asc'
   index do
     if current_admin_user.admin?
       selectable_column
@@ -53,5 +55,4 @@ ActiveAdmin.register Quartel do
   config.comments = false
   menu priority: 15, if: proc{not current_admin_user.recrutador?}
   menu parent: "Buscas específicas", label:"Buscar por organizações", if: proc{not current_admin_user.recrutador?}
-  config.sort_order = "nome"
 end

@@ -9,6 +9,8 @@ ActiveAdmin.register Idioma do
       end
     end
   end
+
+  config.sort_order = 'lingua_nivel_asc'
   index do
     if current_admin_user.admin?
       selectable_column

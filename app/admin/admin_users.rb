@@ -10,6 +10,7 @@ ActiveAdmin.register AdminUser, as: "User" do
     end
   end
 
+  config.sort_order = 'nome_asc'
   index do
     if current_admin_user.admin?
       selectable_column

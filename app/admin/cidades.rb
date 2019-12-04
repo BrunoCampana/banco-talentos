@@ -8,6 +8,8 @@ ActiveAdmin.register Cidade do
       end
     end
   end
+
+  config.sort_order = 'nome_asc'
   index do
     if current_admin_user.admin?
       selectable_column
@@ -50,5 +52,4 @@ ActiveAdmin.register Cidade do
   config.comments = false
   menu priority: 4, if: proc{not current_admin_user.recrutador?}
   menu parent: "Buscas específicas", label:"Buscar por cidade de residência", if: proc{not current_admin_user.recrutador?}
-  config.sort_order = "nome"
 end

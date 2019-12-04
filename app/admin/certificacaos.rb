@@ -1,6 +1,7 @@
 ActiveAdmin.register Certificacao do
   #belongs_to :talento
   #config.remove_action_item(:new)
+
   controller do
     def action_methods
       if current_admin_user.admin?
@@ -10,7 +11,8 @@ ActiveAdmin.register Certificacao do
       end
     end
   end
-
+  
+  config.sort_order = 'titulo_asc'
   index do
     if current_admin_user.admin?
       selectable_column

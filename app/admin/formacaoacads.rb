@@ -11,6 +11,8 @@ ActiveAdmin.register Formacaoacad do
       end
     end
   end
+
+  config.sort_order = 'titulo_asc'
   index do
     if current_admin_user.admin?
       selectable_column

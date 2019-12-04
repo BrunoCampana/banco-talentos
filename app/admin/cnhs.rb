@@ -9,6 +9,8 @@ ActiveAdmin.register Cnh do
       end
     end
   end
+
+  config.sort_order = 'titulo_asc'
   index do
     if current_admin_user.admin?
       selectable_column
@@ -37,7 +39,6 @@ ActiveAdmin.register Cnh do
   config.comments = false
   menu priority: 6, if: proc{not current_admin_user.recrutador?}
   menu parent: "Buscas específicas", label:"Buscar por CNH", if: proc{not current_admin_user.recrutador?}
-  config.sort_order = "titulo"
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
