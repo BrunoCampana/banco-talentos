@@ -188,7 +188,7 @@ ActiveAdmin.register Talento do
 
   form html: { multipart: true } do |f|
     f.inputs "Informações Pessoais" do
-      f.input :consentimento, :required => true, as: :file, :hint => "Faça upload do arquivo (foto ou cópia digital do documento de Política de Privacidade em que o militar concorda com a inserção de seus dados pessoais na Plataforma)"
+      f.input :consentimento, :required => true, as: :file, :hint => "Faça upload do arquivo (foto ou cópia digital do documento de Política de Privacidade em que o militar concorda com a inserção de seus dados pessoais na Plataforma) OU deixe esse campo em branco para que seja enviado email ao militar e ele mesmo realize via email o concorde com as políticas de privacidade."
       f.input :foto, :required => false, :as => :file, :hint => image_tag(f.object.foto.url(:thumb))
       f.input :nome_completo, :hint => "Por extenso, sem abreviações, apenas letras e todas maiúsculas. Ex: ALAN MATHISON TURING"
       f.input :genero #, as: :select, collection: Talento.genero.keys
