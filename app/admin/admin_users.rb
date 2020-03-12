@@ -31,7 +31,7 @@ ActiveAdmin.register AdminUser, as: "User" do
   end
 
   filter :nome
-  filter :tipo, as: :searchable_select
+  filter :tipo, as: :searchable_select, multiple:true, collection: AdminUser.tipos
   filter :status, as: :searchable_select
   filter :quartel
   filter :email
